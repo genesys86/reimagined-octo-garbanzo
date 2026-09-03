@@ -1,10 +1,17 @@
 name: Build
 
+# Pull requests are covered by the pull_request event, so pushing to a PR branch
+# must not also fire the push event — that built every commit twice.
 on:
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
   workflow_dispatch:
+
+# A new commit supersedes the run still going for the same ref.
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
