@@ -39,5 +39,6 @@ for (const r of rows) {
   });
 }
 
-fs.writeFileSync(outFile, JSON.stringify({ generatedAt: new Date().toISOString(), codes }, null, 2) + '\n');
+// No timestamp here either — see the note in import-shopify.mjs.
+fs.writeFileSync(outFile, JSON.stringify({ codes }, null, 2) + '\n');
 console.log(`imported ${codes.length} discount codes: ${codes.map((c) => `${c.code} -${c.value}%`).join(', ')}`);

@@ -376,7 +376,8 @@ products.sort((a, b) => {
 });
 
 const catalog = {
-  generatedAt: new Date().toISOString(),
+  // Deliberately no timestamp: the output must be a pure function of the input
+  // so CI can diff it against the committed copy. Git records when it changed.
   source: path.basename(input),
   productCount: products.length,
   collections,

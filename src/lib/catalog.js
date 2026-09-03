@@ -15,7 +15,6 @@ for (const [file, mod] of Object.entries(overlayModules)) {
 export const products = catalog.products;
 export const collections = catalog.collections;
 export const facets = catalog.facets;
-export const generatedAt = catalog.generatedAt;
 export const hasTranslations = (lang) => Boolean(overlays[lang]);
 
 const byHandle = new Map(products.map((p) => [p.handle, p]));
