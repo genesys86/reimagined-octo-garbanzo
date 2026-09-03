@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import { localeCodes, useTranslations, localePath } from '../../lib/i18n.js';
+import { searchIndex, collections } from '../../lib/catalog.js';
+
+export function getStaticPaths() {
+  return localeCodes.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+
+const index = searchIndex(lang);
+const suggestions = ['diamond', 'emerald', '18K', 'ring', 'pearl', 'sapphire'];
+const labels = {
+  resultsFor: t('search.resultsFor', { query: '{query}' }),
+  empty: t('search.empty', { query: '{query}' }),
+  results: t('common.results'),
+  from: t('product.from'),
+  base: p('products'),
+};
+---
+<Base lang={lang} route="search" title={t('search.title')} noindex>
+  <section class="section-tight wrap">
+    <p class="eyebrow">{t('nav.search')}</p>
+    <h1>{t('search.title')}</h1>
+
+    <form data-search-form role="search" style="margin-top:1.6rem;display:flex;gap:.6rem;max-width:34rem">
+      <label class="visually-hidden" for="q">{t('search.title')}</label>
+      <input id="q" class="field" style="margin:0" name="q" type="search" placeholder={t('search.placeholder')} autocomplete="off" />
+      <button class="btn" type="submit">{t('nav.search')}</button>
+    </form>
+
+    <p class="small muted" style="margin-top:1rem">
+      {t('search.suggestions')}:
+      {suggestions.map((s, i) => (
+        <>
+          {i > 0 && ' · '}
+          <a class="link-line" href={`?q=${encodeURIComponent(s)}`} style="text-transform:none;letter-spacing:0;font-size:inherit">{s}</a>
+        </>
+      ))}
+    </p>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <p class="lede" data-search-status></p>
+    <div class="grid" data-search-results></div>
+
+    <div class="section-head" style="margin-top:3rem">
+      <h2 style="font-size:1.5rem">{t('collections.title')}</h2>
+    </div>
+    <div class="grid">
+      {collections.slice(0, 4).map((c) => (
+        <a class="card" href={p('collections', c.slug)}>
+          <div class="card-media">{c.cover && <img src={c.cover} alt="" loading="lazy" width="600" height="600" />}</div>
+          <div class="card-body">
+            <span class="card-title">{t(`collections.${c.slug}`)}</span>
+            <span class="card-meta">{c.count} {t('collections.pieces')}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <script type="application/json" data-search-index set:html={JSON.stringify({ index, labels })} />
+  <script>
+    import LMV from '../../scripts/store.js';
+
+    const { index, labels } = JSON.parse(document.querySelector('[data-search-index]').textContent);
+    const form = document.querySelector('[data-search-form]');
+    const input = form.querySelector('input');
+    const resultsEl = document.querySelector('[data-search-results]');
+    const statusEl = document.querySelector('[data-search-status]');
+    const lang = document.documentElement.lang;
+
+    function search(query) {
+      const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!terms.length) return [];
+      return index
+        .map((item) => {
+          const score = terms.reduce((sum, term) => {
+            if (item.t.toLowerCase().includes(term)) return sum + 3;
+            if (item.k.includes(term)) return sum + 1;
+            return sum - 10;
+          }, 0);
+          return { item, score };
+        })
+        .filter((r) => r.score > 0)
+        .sort((a, b) => b.score - a.score || a.item.p - b.item.p)
+        .slice(0, 48)
+        .map((r) => r.item);
+    }
+
+    function render(query) {
+      const hits = search(query);
+      if (!query) { statusEl.textContent = ''; resultsEl.innerHTML = ''; return; }
+
+      statusEl.textContent = hits.length
+        ? `${labels.resultsFor.replace('{query}', query)} — ${hits.length} ${labels.results}`
+        : labels.empty.replace('{query}', query);
+
+      resultsEl.innerHTML = hits.map((item) => `
+        <a class="card" href="${labels.base}${item.h}/">
+          <div class="card-media">${item.i ? `<img src="${item.i}" alt="" loading="lazy" width="600" height="600">` : ''}</div>
+          <div class="card-body">
+            <span class="card-title">${item.t}</span>
+            <span class="card-price"><span data-price="${item.p}"></span></span>
+          </div>
+        </a>`).join('');
+
+      LMV.paintPrices(resultsEl);
+    }
+
+    function currentQuery() {
+      return new URLSearchParams(window.location.search).get('q') || '';
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const url = new URL(window.location.href);
+      url.searchParams.set('q', input.value);
+      history.replaceState(null, '', url);
+      render(input.value);
+    });
+
+    input.addEventListener('input', () => render(input.value));
+    document.addEventListener('lmv:currency', () => render(input.value));
+
+    input.value = currentQuery();
+    render(input.value);
+  </script>
+</Base>

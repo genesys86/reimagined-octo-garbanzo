@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { localeCodes, useTranslations, localePath } from '../../../lib/i18n.js';
+import { collections, products } from '../../../lib/catalog.js';
+
+export function getStaticPaths() {
+  return localeCodes.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const all = [{ slug: 'all', count: products.length, cover: products.find((x) => x.images.length)?.images[0].src }, ...collections];
+---
+<Base lang={lang} route="collections" title={t('collections.title')} description={t('collections.subtitle')}>
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={p()}>{t('nav.home')}</a><span>/</span><span>{t('collections.title')}</span>
+    </nav>
+  </div>
+
+  <section class="section-tight wrap">
+    <p class="eyebrow">{t('nav.collections')}</p>
+    <h1>{t('collections.title')}</h1>
+    <p class="lede" style="margin-top:1rem">{t('collections.subtitle')}</p>
+  </section>
+
+  <section class="section-tight wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <div class="grid">
+      {all.map((c) => (
+        <a class="card" href={p('collections', c.slug)}>
+          <div class="card-media">
+            {c.cover && <img src={c.cover} alt="" loading="lazy" decoding="async" width="600" height="600" />}
+          </div>
+          <div class="card-body">
+            <span class="card-title">{t(`collections.${c.slug}`)}</span>
+            <span class="card-meta">{c.count} {t('collections.pieces')}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

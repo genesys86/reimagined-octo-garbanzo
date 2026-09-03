@@ -1,0 +1,211 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { localeCodes, useTranslations, localePath } from '../../../lib/i18n.js';
+import { collections, productsIn, localizedProduct, facets } from '../../../lib/catalog.js';
+import { formatMoney } from '../../../lib/money.js';
+import { getLocale } from '../../../data/site.config.mjs';
+
+export function getStaticPaths() {
+  const slugs = ['all', ...collections.map((c) => c.slug)];
+  return localeCodes.flatMap((lang) => slugs.map((slug) => ({ params: { lang, slug } })));
+}
+
+const { lang, slug } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const currency = getLocale(lang).defaultCurrency;
+
+const items = productsIn(slug).map((prod) => localizedProduct(prod, lang));
+const title = t(`collections.${slug}`);
+
+/** Only offer a facet when this collection actually has more than one value. */
+const facetValues = (key) => {
+  const values = new Set();
+  for (const prod of items) for (const v of prod.attributes[key] || []) values.add(v);
+  return [...values].filter((v) => facets[key]?.includes(v) || key === 'gender').sort();
+};
+const metalOptions = facetValues('metals');
+const stoneOptions = facetValues('stones');
+const genderOptions = facetValues('gender');
+
+const priceBuckets = [
+  { key: 'a', max: 500 },
+  { key: 'b', min: 500, max: 2500 },
+  { key: 'c', min: 2500, max: 15000 },
+  { key: 'd', min: 15000 },
+];
+const bucketLabel = (b) =>
+  b.min == null ? t('filters.priceUnder', { amount: formatMoney(b.max, currency, lang) })
+  : b.max == null ? t('filters.priceOver', { amount: formatMoney(b.min, currency, lang) })
+  : t('filters.priceBetween', { min: formatMoney(b.min, currency, lang), max: formatMoney(b.max, currency, lang) });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  numberOfItems: items.length,
+};
+---
+<Base
+  lang={lang}
+  route={`collections/${slug}`}
+  title={title}
+  description={`${title} — ${items.length} ${t('collections.pieces')}. ${t('meta.siteDescription')}`}
+  jsonLd={jsonLd}
+>
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={p()}>{t('nav.home')}</a><span>/</span>
+      <a href={p('collections')}>{t('collections.title')}</a><span>/</span>
+      <span>{title}</span>
+    </nav>
+  </div>
+
+  <section class="section-tight wrap">
+    <p class="eyebrow">{t('nav.collections')}</p>
+    <h1>{title}</h1>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <div class="listing">
+      <aside class="filters" id="filters" aria-label={t('common.filters')}>
+        {metalOptions.length > 1 && (
+          <details class="filter-group" open>
+            <summary>{t('filters.metal')}</summary>
+            <div class="filter-options">
+              {metalOptions.map((v) => (
+                <label><input type="checkbox" data-facet="metals" value={v} />{t(`terms.${v}`)}</label>
+              ))}
+            </div>
+          </details>
+        )}
+        {stoneOptions.length > 1 && (
+          <details class="filter-group" open>
+            <summary>{t('filters.stone')}</summary>
+            <div class="filter-options">
+              {stoneOptions.map((v) => (
+                <label><input type="checkbox" data-facet="stones" value={v} />{t(`terms.${v}`)}</label>
+              ))}
+            </div>
+          </details>
+        )}
+        {genderOptions.length > 1 && (
+          <details class="filter-group">
+            <summary>{t('filters.gender')}</summary>
+            <div class="filter-options">
+              {genderOptions.map((v) => (
+                <label><input type="checkbox" data-facet="gender" value={v} />{t(`terms.${v}`)}</label>
+              ))}
+            </div>
+          </details>
+        )}
+        <details class="filter-group">
+          <summary>{t('filters.price')}</summary>
+          <div class="filter-options">
+            {priceBuckets.map((b) => (
+              <label>
+                <input type="checkbox" data-price-bucket value={b.key} data-min={b.min ?? ''} data-max={b.max ?? ''} />
+                {bucketLabel(b)}
+              </label>
+            ))}
+          </div>
+        </details>
+        <div class="filter-group">
+          <button class="btn btn-ghost btn-sm btn-block" type="button" data-clear-filters>{t('common.clearFilters')}</button>
+        </div>
+      </aside>
+
+      <div>
+        <div class="listing-bar">
+          <button class="btn btn-ghost btn-sm filters-toggle" type="button" data-toggle="#filters" aria-expanded="false">
+            {t('common.filters')}
+          </button>
+          <span class="small muted"><span data-result-count>{items.length}</span> {t('common.results')}</span>
+          <label>
+            <span class="visually-hidden">{t('common.sort')}</span>
+            <select class="select" data-sort>
+              <option value="featured">{t('filters.sortRelevance')}</option>
+              <option value="price-asc">{t('filters.sortPriceAsc')}</option>
+              <option value="price-desc">{t('filters.sortPriceDesc')}</option>
+              <option value="name">{t('filters.sortNameAsc')}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid" data-product-grid>
+          {items.map((prod, i) => (
+            <div
+              class="card-slot"
+              data-metals={(prod.attributes.metals || []).join(' ')}
+              data-stones={(prod.attributes.stones || []).join(' ')}
+              data-gender={(prod.attributes.gender || []).join(' ')}
+              data-amount={prod.price.min}
+              data-name={prod.title}
+              data-order={i}
+            >
+              <ProductCard product={prod} lang={lang} eager={i < 4} />
+            </div>
+          ))}
+        </div>
+
+        <p class="notice" data-empty-state hidden style="margin-top:2rem">{t('common.noResults')}</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const grid = document.querySelector('[data-product-grid]');
+    if (grid) {
+      const slots = Array.from(grid.querySelectorAll('.card-slot'));
+      const facetInputs = Array.from(document.querySelectorAll('[data-facet]'));
+      const priceInputs = Array.from(document.querySelectorAll('[data-price-bucket]'));
+      const sortSelect = document.querySelector('[data-sort]');
+      const countEl = document.querySelector('[data-result-count]');
+      const emptyEl = document.querySelector('[data-empty-state]');
+
+      const selected = (key) =>
+        facetInputs.filter((i) => i.checked && i.dataset.facet === key).map((i) => i.value);
+
+      function apply() {
+        const wanted = { metals: selected('metals'), stones: selected('stones'), gender: selected('gender') };
+        const ranges = priceInputs.filter((i) => i.checked).map((i) => ({
+          min: i.dataset.min === '' ? -Infinity : Number(i.dataset.min),
+          max: i.dataset.max === '' ? Infinity : Number(i.dataset.max),
+        }));
+
+        let visible = 0;
+        for (const slot of slots) {
+          const has = (key) => (slot.dataset[key] || '').split(' ').filter(Boolean);
+          const price = Number(slot.dataset.amount);
+          const matches =
+            Object.entries(wanted).every(([key, values]) => !values.length || values.some((v) => has(key).includes(v))) &&
+            (!ranges.length || ranges.some((r) => price >= r.min && price < r.max));
+          slot.hidden = !matches;
+          if (matches) visible++;
+        }
+
+        if (countEl) countEl.textContent = String(visible);
+        if (emptyEl) emptyEl.hidden = visible > 0;
+      }
+
+      function sort() {
+        const mode = sortSelect?.value || 'featured';
+        const ordered = [...slots].sort((a, b) => {
+          if (mode === 'price-asc') return Number(a.dataset.amount) - Number(b.dataset.amount);
+          if (mode === 'price-desc') return Number(b.dataset.amount) - Number(a.dataset.amount);
+          if (mode === 'name') return (a.dataset.name || '').localeCompare(b.dataset.name || '', document.documentElement.lang);
+          return Number(a.dataset.order) - Number(b.dataset.order);
+        });
+        ordered.forEach((slot, i) => { slot.style.order = String(i); });
+      }
+
+      [...facetInputs, ...priceInputs].forEach((input) => input.addEventListener('change', apply));
+      sortSelect?.addEventListener('change', sort);
+      document.querySelector('[data-clear-filters]')?.addEventListener('click', () => {
+        [...facetInputs, ...priceInputs].forEach((i) => { i.checked = false; });
+        apply();
+      });
+    }
+  </script>
+</Base>

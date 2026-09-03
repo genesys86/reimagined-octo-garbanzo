@@ -1,0 +1,14 @@
+# Netlify / Cloudflare Pages: negotiate the language at the edge, so the root
+# never has to fall back to the client-side gateway in src/pages/index.astro.
+/  /it/  302  Language=it
+/  /fr/  302  Language=fr
+/  /es/  302  Language=es
+/  /de/  302  Language=de
+/  /ar/  302  Language=ar
+/  /en/  302
+
+# Legacy Shopify paths, in case links to the old store are still in the wild.
+/products/*   /en/products/:splat  301
+/collections/*  /en/collections/:splat  301
+/pages/*      /en/pages/:splat  301
+/cart         /en/cart/  301

@@ -1,0 +1,51 @@
+name: Build
+
+# Pull requests are covered by the pull_request event, so pushing to a PR branch
+# must not also fire the push event — that built every commit twice.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A new commit supersedes the run still going for the same ref.
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Rebuild the catalogue from the supplier export
+        run: |
+          npm run import
+          npm run import:discounts
+
+      - name: Fail if the committed catalogue is stale
+        run: |
+          if ! git diff --quiet -- src/data/catalog.json src/data/discounts.json; then
+            echo "::error::src/data/catalog.json is out of date — run 'npm run import' and commit the result."
+            git --no-pager diff --stat -- src/data/catalog.json src/data/discounts.json
+            exit 1
+          fi
+
+      - run: npm run build
+
+      - name: Install the test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke-test the built site
+        run: |
+          npx astro preview --port 4321 &
+          npx wait-on -t 60000 http://localhost:4321/en/
+          node tests/smoke.mjs

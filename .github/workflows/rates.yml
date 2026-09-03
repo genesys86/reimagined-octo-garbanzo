@@ -1,0 +1,38 @@
+name: Refresh exchange rates
+
+# Converted prices are only as fresh as src/data/rates.json, and the file is
+# committed so the build never depends on a third-party API being up. This job
+# refreshes it every morning and lets the host redeploy on the resulting commit.
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - run: node scripts/fetch-rates.mjs
+        env:
+          EXCHANGE_RATE_API_URL: ${{ secrets.EXCHANGE_RATE_API_URL }}
+
+      - name: Commit if the rates moved
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- src/data/rates.json; then
+            echo "rates unchanged"
+            exit 0
+          fi
+          git add src/data/rates.json
+          git commit -m "chore: refresh exchange rates"
+          git push

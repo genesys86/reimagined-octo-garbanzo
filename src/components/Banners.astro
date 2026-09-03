@@ -1,0 +1,45 @@
+---
+import { localePath, useTranslations } from '../lib/i18n.js';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+/**
+ * The geo prompt names a language and a currency the client only knows at
+ * runtime, so the sentence is split around markers and the blanks are filled in
+ * by store.js. Translations keep their own word order this way.
+ */
+const MARK_L = '\uE000';
+const MARK_C = '\uE001';
+const geoParts = t('geo.message', { language: MARK_L, currency: MARK_C })
+  .split(new RegExp(`([${MARK_L}${MARK_C}])`))
+  .filter((part) => part !== '');
+---
+<div class="banner" data-geo-banner hidden>
+  <div class="wrap">
+    <p>
+      {geoParts.map((part) =>
+        part === MARK_L ? <strong data-geo-language></strong>
+        : part === MARK_C ? <strong data-geo-currency></strong>
+        : <span>{part}</span>
+      )}
+    </p>
+    <div class="banner-actions">
+      <button class="btn btn-sm" data-geo-accept type="button">{t('geo.accept')}</button>
+      <button class="btn btn-ghost btn-sm" data-geo-decline type="button">{t('geo.decline')}</button>
+    </div>
+  </div>
+</div>
+
+<div class="banner" data-cookie-banner hidden>
+  <div class="wrap">
+    <p>
+      {t('cookies.message')}{' '}
+      <a class="link-line" href={localePath(lang, 'pages', 'cookies')}>{t('cookies.settings')}</a>
+    </p>
+    <div class="banner-actions">
+      <button class="btn btn-sm" data-consent="all" type="button">{t('cookies.accept')}</button>
+      <button class="btn btn-ghost btn-sm" data-consent="essential" type="button">{t('cookies.reject')}</button>
+    </div>
+  </div>
+</div>

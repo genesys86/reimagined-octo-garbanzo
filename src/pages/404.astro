@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { useTranslations, localePath } from '../lib/i18n.js';
+import { defaultLocale } from '../data/site.config.mjs';
+
+/**
+ * One 404 for the whole site — the host serves it for any unmatched path, so it
+ * cannot know the language yet. It renders in the default language and the
+ * inline script re-labels it from the URL prefix when there is one.
+ */
+const lang = defaultLocale;
+const t = useTranslations(lang);
+---
+<Base lang={lang} route="" title={t('error.404Title')} noindex>
+  <section class="section wrap" style="text-align:center;padding-block:clamp(4rem,12vw,9rem)">
+    <p class="eyebrow">404</p>
+    <h1 data-404-title>{t('error.404Title')}</h1>
+    <p class="lede" style="margin:1.2rem auto 2rem" data-404-body>{t('error.404Body')}</p>
+    <a class="btn" href={localePath(lang, 'collections', 'all')} data-404-cta>{t('error.404Cta')}</a>
+  </section>
+
+  <script>
+    import en from '../data/locales/en.json';
+    import it from '../data/locales/it.json';
+    import fr from '../data/locales/fr.json';
+    import es from '../data/locales/es.json';
+    import de from '../data/locales/de.json';
+    import ar from '../data/locales/ar.json';
+
+    const dictionaries = { en, it, fr, es, de, ar };
+    const lang = (location.pathname.match(/^\/([a-z]{2})\//) || [])[1];
+    const dict = dictionaries[lang];
+    if (dict) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelector('[data-404-title]').textContent = dict.error['404Title'];
+      document.querySelector('[data-404-body]').textContent = dict.error['404Body'];
+      const cta = document.querySelector('[data-404-cta]');
+      cta.textContent = dict.error['404Cta'];
+      cta.setAttribute('href', `/${lang}/collections/all/`);
+    }
+  </script>
+</Base>

@@ -1,0 +1,6 @@
+Name,Value,Value Type,Type,Discount Class,Minimum Purchase Requirements,Combines with Order Discounts,Combines with Product Discounts,Combines with Shipping Discounts,Customer Selection,Context,Times Used In Total,Applies Once Per Customer,Usage Limit Per Code,Status,Start,End
+T1VN2KZQ6Q7C,-35.0,percentage,Buy X Get Y,product,,1,1,,all,all,0,,,Active,2026-05-09 00:05:20 +0300,
+QT39EDEFQWBQ,-45.0,percentage,Amount Off,order,,,1,,all,all,0,,1,Active,2026-06-23 18:50:50 +0300,
+RGJJ2FATW7SP,-15.0,percentage,Amount Off,order,,1,1,1,all,all,0,,,Active,2026-07-11 20:02:25 +0300,
+WELCOME10,-10.0,percentage,Amount Off,order,,,,,all,all,0,,,Active,2026-07-21 03:00:00 +0300,
+[DO NOT DELETE] Vitals Automatic Discount-Grouped-1221728,,app,App Discount,product,,1,1,1,all,all,0,,,Active,2026-08-14 12:03:13 +0300,

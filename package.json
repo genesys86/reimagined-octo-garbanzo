@@ -1,0 +1,26 @@
+{
+  "name": "lamaisonvaldor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "La Maison Val d'Or — standalone multilingual & multi-currency dropshipping storefront",
+  "scripts": {
+    "import": "node scripts/import-shopify.mjs",
+    "import:discounts": "node scripts/import-discounts.mjs",
+    "rates": "node scripts/fetch-rates.mjs",
+    "translate": "node scripts/translate.mjs",
+    "images:download": "node scripts/download-images.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node tests/smoke.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.1",
+    "@astrojs/sitemap": "^3.7.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1",
+    "wait-on": "^9.0.1"
+  }
+}

@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import { localeCodes, useTranslations, localePath } from '../../lib/i18n.js';
+import { checkoutMode, site } from '../../data/site.config.mjs';
+
+export function getStaticPaths() {
+  return localeCodes.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const isEnquiry = checkoutMode !== 'stripe';
+
+const config = {
+  mode: checkoutMode,
+  email: site.email,
+  whatsapp: site.whatsapp,
+  subject: `${t('checkout.titleEnquiry')} — La Maison Val d'Or`,
+  labels: {
+    summary: t('checkout.summary'),
+    subtotal: t('cart.subtotal'),
+    discount: t('cart.discount'),
+    shipping: t('cart.shipping'),
+    free: t('cart.shippingFree'),
+    total: t('cart.total'),
+    sending: t('checkout.sending'),
+    submit: isEnquiry ? t('checkout.submit') : t('checkout.submitPay'),
+    successTitle: t('checkout.successTitle'),
+    successBody: t('checkout.successBody', { email: '{email}' }),
+    errorTitle: t('checkout.errorTitle'),
+    errorBody: t('checkout.errorBody', { email: site.email }),
+    empty: t('cart.empty'),
+  },
+};
+---
+<Base lang={lang} route="checkout" title={isEnquiry ? t('checkout.titleEnquiry') : t('checkout.title')} noindex>
+  <section class="section-tight wrap">
+    <p class="eyebrow">{t('nav.cart')}</p>
+    <h1>{isEnquiry ? t('checkout.titleEnquiry') : t('checkout.title')}</h1>
+    <p class="lede" style="margin-top:1rem">{isEnquiry ? t('checkout.introEnquiry') : t('checkout.introStripe')}</p>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <div class="cart-layout">
+      <form data-checkout-form novalidate>
+        <div class="field-row">
+          <label class="field"><span>{t('checkout.firstName')}</span><input name="firstName" autocomplete="given-name" required /></label>
+          <label class="field"><span>{t('checkout.lastName')}</span><input name="lastName" autocomplete="family-name" required /></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>{t('checkout.email')}</span><input type="email" name="email" autocomplete="email" required /></label>
+          <label class="field"><span>{t('checkout.phone')}</span><input name="phone" autocomplete="tel" /></label>
+        </div>
+        <label class="field"><span>{t('checkout.address')}</span><input name="address" autocomplete="street-address" /></label>
+        <div class="field-row">
+          <label class="field"><span>{t('checkout.zip')}</span><input name="zip" autocomplete="postal-code" /></label>
+          <label class="field"><span>{t('checkout.city')}</span><input name="city" autocomplete="address-level2" /></label>
+        </div>
+        <label class="field"><span>{t('checkout.country')}</span><input name="country" autocomplete="country-name" required /></label>
+        <label class="field">
+          <span>{t('checkout.message')}</span>
+          <textarea name="message" rows="4" placeholder={t('checkout.messagePlaceholder')}></textarea>
+        </label>
+
+        <label style="display:flex;gap:.6rem;align-items:flex-start;font-size:.86rem;margin-bottom:1.4rem">
+          <input type="checkbox" name="consent" required style="margin-top:.25rem" />
+          <span>
+            {t('checkout.consent')}
+            <a class="link-line" href={p('pages', 'terms')} style="text-transform:none;letter-spacing:0;font-size:inherit"> ›</a>
+          </span>
+        </label>
+
+        <button class="btn btn-block" type="submit" data-checkout-submit>{config.labels.submit}</button>
+
+        <div class="notice notice-ok" data-checkout-success hidden style="margin-top:1.2rem"></div>
+        <div class="notice notice-error" data-checkout-error hidden style="margin-top:1.2rem"></div>
+
+        {isEnquiry && (
+          <p class="small muted" style="margin-top:1rem">
+            <a class="link-line" href={`mailto:${site.email}`} style="text-transform:none;letter-spacing:0">{t('checkout.orEmail')}</a>
+          </p>
+        )}
+      </form>
+
+      <aside class="summary-box">
+        <h2 style="font-size:1.3rem;margin-bottom:1rem">{t('checkout.summary')}</h2>
+        <div data-checkout-lines></div>
+        <div class="summary-row"><span>{t('cart.subtotal')}</span><span data-subtotal></span></div>
+        <div class="summary-row" data-discount-row hidden><span>{t('cart.discount')}</span><span data-discount-value></span></div>
+        <div class="summary-row"><span>{t('cart.shipping')}</span><span data-shipping></span></div>
+        <div class="summary-row total"><span>{t('cart.total')}</span><span data-total></span></div>
+        <a class="link-line" href={p('cart')} style="display:inline-block;margin-top:1.2rem">{t('common.back')}</a>
+      </aside>
+    </div>
+  </section>
+
+  <script type="application/json" data-checkout-config set:html={JSON.stringify(config)} />
+  <script>
+    import LMV from '../../scripts/store.js';
+
+    const config = JSON.parse(document.querySelector('[data-checkout-config]').textContent);
+    const form = document.querySelector('[data-checkout-form]');
+    const linesEl = document.querySelector('[data-checkout-lines]');
+    const successEl = document.querySelector('[data-checkout-success]');
+    const errorEl = document.querySelector('[data-checkout-error]');
+    const submitBtn = document.querySelector('[data-checkout-submit]');
+    const lang = document.documentElement.lang;
+
+    const money = (amount) => LMV.formatMoney(amount, LMV.currency, lang);
+
+    function renderSummary() {
+      const cart = LMV.cart;
+      linesEl.innerHTML = cart.length
+        ? cart.map((line) => `
+            <div class="summary-row">
+              <span>${line.qty} × ${line.title}</span>
+              <span>${money(line.price * line.qty)}</span>
+            </div>`).join('')
+        : `<p class="small muted">${config.labels.empty}</p>`;
+
+      const totals = LMV.totals();
+      document.querySelector('[data-subtotal]').textContent = money(totals.subtotal);
+      const row = document.querySelector('[data-discount-row]');
+      row.hidden = !totals.discount;
+      if (totals.discount) document.querySelector('[data-discount-value]').textContent = `− ${money(totals.reduction)}`;
+      document.querySelector('[data-shipping]').textContent = totals.shipping === 0 ? config.labels.free : money(totals.shipping);
+      document.querySelector('[data-total]').textContent = money(totals.total);
+      submitBtn.disabled = cart.length === 0;
+    }
+
+    /** Human-readable order recap, used for the email/WhatsApp handoff. */
+    function orderText(values) {
+      const totals = LMV.totals();
+      const lines = LMV.cart.map((line) => {
+        const options = (line.optionNames || []).map((name, i) => `${name}: ${line.options[i]}`).join(', ');
+        return `- ${line.qty} × ${line.title}${options ? ` (${options})` : ''} — ${line.sku} — ${money(line.price * line.qty)}`;
+      });
+      return [
+        `${values.firstName} ${values.lastName}`,
+        values.email,
+        values.phone,
+        [values.address, values.zip, values.city, values.country].filter(Boolean).join(', '),
+        '',
+        ...lines,
+        '',
+        `${config.labels.subtotal}: ${money(totals.subtotal)}`,
+        totals.discount ? `${config.labels.discount} (${totals.discount.code}): − ${money(totals.reduction)}` : '',
+        `${config.labels.shipping}: ${totals.shipping === 0 ? config.labels.free : money(totals.shipping)}`,
+        `${config.labels.total}: ${money(totals.total)} (${LMV.currency})`,
+        '',
+        values.message,
+      ].filter(Boolean).join('\n');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity() || LMV.cart.length === 0) return;
+
+      const values = Object.fromEntries(new FormData(form));
+      successEl.hidden = true;
+      errorEl.hidden = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = config.labels.sending;
+
+      try {
+        if (config.mode === 'stripe') {
+          const res = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ items: LMV.cart, currency: LMV.currency, locale: lang, customer: values, discount: LMV.getDiscount()?.code || null }),
+          });
+          if (!res.ok) throw new Error(`checkout ${res.status}`);
+          const { url } = await res.json();
+          if (!url) throw new Error('no session url');
+          LMV.clearCart();
+          window.location.href = url;
+          return;
+        }
+
+        const body = orderText(values);
+        window.location.href =
+          `mailto:${config.email}?subject=${encodeURIComponent(config.subject)}&body=${encodeURIComponent(body)}`;
+        successEl.innerHTML = `<strong>${config.labels.successTitle}</strong><br>${config.labels.successBody.replace('{email}', values.email)}`;
+        successEl.hidden = false;
+        LMV.clearCart();
+        form.reset();
+      } catch (err) {
+        errorEl.innerHTML = `<strong>${config.labels.errorTitle}</strong><br>${config.labels.errorBody}`;
+        errorEl.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = config.labels.submit;
+      }
+    });
+
+    document.addEventListener('lmv:cart', renderSummary);
+    document.addEventListener('lmv:currency', renderSummary);
+    renderSummary();
+  </script>
+</Base>

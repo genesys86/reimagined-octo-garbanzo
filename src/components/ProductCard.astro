@@ -1,0 +1,43 @@
+---
+import Price from './Price.astro';
+import { localePath, useTranslations } from '../lib/i18n.js';
+
+const { product, lang, eager = false } = Astro.props;
+const t = useTranslations(lang);
+const href = localePath(lang, 'products', product.handle);
+const [first, second] = product.images;
+const discount = product.price.compareAt && product.price.compareAt > product.price.min
+  ? Math.round((1 - product.price.min / product.price.compareAt) * 100)
+  : 0;
+const meta = [
+  product.attributes.karat,
+  ...(product.attributes.stones || []).slice(0, 1).map((s) => t(`terms.${s}`)),
+].filter(Boolean).join(' · ');
+---
+<a class="card" href={href}>
+  <div class="card-media">
+    {discount > 0 && <span class="badge badge-gold">{t('product.save', { percent: discount })}</span>}
+    {first && (
+      <img
+        src={first.src}
+        alt={first.alt || product.title}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        width="600"
+        height="600"
+      />
+    )}
+    {second && <img class="alt-img" src={second.src} alt="" loading="lazy" decoding="async" width="600" height="600" />}
+  </div>
+  <div class="card-body">
+    {meta && <span class="card-meta">{meta}</span>}
+    <span class="card-title">{product.title}</span>
+    <span class="card-price">
+      {product.price.max > product.price.min && <span class="muted small">{t('product.from')} </span>}
+      <Price amount={product.price.min} lang={lang} />
+      {product.price.compareAt > product.price.min && (
+        <Price amount={product.price.compareAt} lang={lang} class="was" />
+      )}
+    </span>
+  </div>
+</a>

@@ -1,0 +1,100 @@
+{
+  "about": {
+    "title": "La Maison",
+    "lead": "La Maison Val d'Or existe pour une raison : la haute joaillerie se vend quatre fois son coût de fabrication, et presque rien de cette différence ne revient à ceux qui taillent les pierres.",
+    "sections": [
+      { "h": "Notre façon de travailler", "p": "Nous n'avons pas de coffre. Chaque pièce de ce site appartient à un atelier que nous avons vérifié — à Anvers, Surat, Valenza et Bangkok. Lorsque vous commandez, l'atelier termine la pièce, le laboratoire la certifie quand la certification s'applique, puis elle part assurée vers votre adresse. Vous payez la pierre et le travail, pas une boutique sur une avenue." },
+      { "h": "Les pierres", "p": "Nous présentons côte à côte les diamants naturels et de laboratoire, en disant clairement lesquels sont lesquels. Les pierres de couleur sont décrites par espèce, traitement et origine chaque fois que le fournisseur les documente. Lorsqu'une pièce possède un rapport IGI ou GIA, son numéro voyage avec le colis." },
+      { "h": "Ce que cela change pour vous", "p": "La livraison prend six à douze jours ouvrés plutôt que l'après-midi même, parce que la pièce est fabriquée après votre commande. En échange, vous obtenez un prix qui reflète la matière. Cela nous paraît un échange honnête, et nous le disons avant l'achat plutôt qu'après." },
+      { "h": "Garanties écrites", "p": "Quatorze jours pour changer d'avis sur les pièces en stock. Deux ans de garantie contre les défauts de fabrication. Transport assuré dans les deux sens. Si une pierre ne correspond pas à sa description, nous récupérons la pièce à nos frais et remboursons intégralement." }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Un conseiller répond à chaque message sous un jour ouvré, du lundi au vendredi, en français, anglais, italien, espagnol, allemand ou arabe.",
+    "sections": [
+      { "h": "Avant d'écrire", "p": "Pour une commande déjà passée, indiquez la référence figurant dans votre e-mail de confirmation : cela nous permet de répondre en un message plutôt qu'en trois." },
+      { "h": "Sur mesure et recherche de pierres", "p": "Si vous cherchez une pierre précise — un poids, un grade de couleur, un certificat — décrivez-la et nous reviendrons vers vous avec ce que nos ateliers peuvent trouver et à quel prix." }
+    ]
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "lead": "Les questions auxquelles nos conseillers répondent le plus souvent.",
+    "faqs": [
+      { "q": "Les diamants sont-ils véritables ?", "a": "Oui. Nous vendons des diamants naturels et des diamants de laboratoire, et chaque fiche précise lequel. Les diamants de laboratoire sont chimiquement et optiquement identiques aux diamants extraits ; ce ne sont pas des imitations comme la zircone cubique ou la moissanite, que nous étiquetons séparément lorsque nous en vendons." },
+      { "q": "Pourquoi la livraison prend-elle six à douze jours ouvrés ?", "a": "Parce que la pièce est fabriquée ou libérée après votre commande plutôt que de dormir dans un entrepôt. C'est ce qui permet le prix. Les pièces indiquées en stock partent sous trois jours ouvrés." },
+      { "q": "Dans quelle devise suis-je débité ?", "a": "Dans la devise choisie dans le sélecteur en haut de page. Les prix convertis sont indicatifs et actualisés chaque jour ; le montant confirmé au paiement est celui que vous payez." },
+      { "q": "Dois-je payer des droits de douane ?", "a": "À l'intérieur de l'Union européenne, non : la TVA est incluse. Hors UE, les droits d'importation et taxes locales sont fixés par votre pays et vous incombent à la livraison. Nous déclarons chaque colis à sa valeur réelle ; nous ne pouvons pas les déclarer comme cadeaux." },
+      { "q": "Puis-je retourner une pièce ?", "a": "Oui, dans les quatorze jours suivant la livraison, non portée et dans son emballage, pour les pièces en stock. Les pièces sur commande, remises à la taille ou gravées sont exclues, comme le droit européen de la consommation le permet pour les biens personnalisés." },
+      { "q": "Comment connaître ma taille de bague ?", "a": "Mesurez le diamètre intérieur d'une bague que vous portez déjà et donnez-nous la valeur en millimètres — nous convertissons. En cas d'erreur, la première mise à la taille sur un anneau lisse est offerte." },
+      { "q": "Le colis est-il assuré ?", "a": "Chaque colis voyage suivi et intégralement assuré jusqu'à la signature. S'il est perdu en transit, nous le remplaçons ou le remboursons." },
+      { "q": "Fournissez-vous des certificats ?", "a": "Les pièces certifiées sont expédiées avec leur rapport IGI ou GIA. La fiche produit l'indique explicitement ; lorsqu'aucun rapport n'est mentionné, aucun n'est fourni." }
+    ]
+  },
+  "shipping": {
+    "title": "Livraison",
+    "lead": "Suivie et assurée vers plus de cent pays.",
+    "sections": [
+      { "h": "Délais", "p": "Pièces sur commande : 6 à 12 jours ouvrés de la commande à la livraison. Pièces en stock : 3 à 6 jours ouvrés. Pierres nues : 4 à 8 jours ouvrés. Vous recevez un numéro de suivi dès l'enlèvement du colis." },
+      { "h": "Coût", "p": "Livraison assurée offerte au-delà du seuil indiqué dans votre panier. En deçà, un forfait de livraison assurée s'applique et s'affiche avant le paiement. La livraison express est disponible sur demande." },
+      { "h": "Droits et taxes", "p": "Les commandes au sein de l'Union européenne incluent la TVA et ne subissent aucun frais supplémentaire. Hors UE, des droits d'importation et taxes locales fixés par le pays de destination peuvent s'appliquer et restent à la charge du destinataire. Chaque colis est déclaré à sa pleine valeur." },
+      { "h": "Remise", "p": "Tous les colis exigent une signature. En cas d'absence, le transporteur laisse un avis et conserve le colis à l'agence locale. Nous pouvons livrer sur un lieu de travail ou un point relais si cela vous arrange." }
+    ]
+  },
+  "returns": {
+    "title": "Retours et garantie",
+    "lead": "Quatorze jours pour changer d'avis, deux ans contre les défauts de fabrication.",
+    "sections": [
+      { "h": "Droit de rétractation", "p": "Si vous résidez dans l'Union européenne, vous pouvez vous rétracter dans les quatorze jours suivant la livraison sans avoir à vous justifier. Écrivez-nous et nous envoyons une étiquette de retour prépayée et assurée. La pièce doit être non portée, complète et dans son emballage d'origine avec son éventuel certificat." },
+      { "h": "Exclusions", "p": "Les pièces sur commande, les bagues remises à la taille, les articles gravés et les pierres taillées sur cahier des charges sont exclus du droit de rétractation, comme le droit européen l'autorise pour les biens confectionnés selon les spécifications du client. Cela figure sur la fiche produit avant la commande." },
+      { "h": "Remboursements", "p": "Une fois le retour parvenu à l'atelier et contrôlé — généralement deux à quatre jours ouvrés après l'enlèvement — nous remboursons l'intégralité sur votre moyen de paiement d'origine sous cinq jours ouvrés." },
+      { "h": "Garantie", "p": "Deux ans contre les défauts de fabrication : défaillance de sertissage, rupture de fermoir, perte de placage en usage normal. Les dommages dus aux chocs, aux produits chimiques ou à une réparation non autorisée ne sont pas couverts. Écrivez-nous avec des photographies et nous organisons l'enlèvement." }
+    ]
+  },
+  "payment": {
+    "title": "Paiement",
+    "lead": "Comment et quand vous êtes débité.",
+    "sections": [
+      { "h": "Moyens", "p": "Carte (Visa, Mastercard, American Express), Apple Pay, Google Pay et virement bancaire. Les pièces de valeur élevée peuvent être réglées par virement avec facture proforma ; un conseiller s'en charge." },
+      { "h": "Sécurité", "p": "Les paiements sont traités par notre prestataire sur sa propre infrastructure chiffrée. Nous ne voyons jamais et ne conservons jamais votre numéro de carte." },
+      { "h": "Devise", "p": "Vous êtes débité dans la devise sélectionnée. Les prix convertis sont actualisés chaque jour à partir de taux interbancaires publiés, puis arrondis ; votre banque peut appliquer sa propre conversion si la devise diffère de celle de votre compte." },
+      { "h": "Factures", "p": "Une facture avec TVA est émise pour chaque commande et envoyée par e-mail. Les clients professionnels établis dans l'UE peuvent communiquer un numéro de TVA valide avant paiement pour l'autoliquidation." }
+    ]
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "lead": "Ce que nous collectons, pourquoi, et comment nous demander de l'effacer. Cette politique suit le règlement (UE) 2016/679 (RGPD).",
+    "sections": [
+      { "h": "Responsable du traitement", "p": "La Maison Val d'Or est responsable du traitement des données personnelles collectées via lamaisonvaldor.com. Écrivez à l'adresse figurant sur la page Contact pour toute demande relative à vos données." },
+      { "h": "Ce que nous collectons", "p": "Données de commande (nom, e-mail, téléphone, adresses de livraison et de facturation, contenu de la commande) pour exécuter le contrat de vente. Données de contact lorsque vous nous écrivez, pour vous répondre. Données techniques (adresse IP, navigateur, pages consultées) pour la sécurité et le fonctionnement du site. Données marketing (adresse e-mail) uniquement si vous vous abonnez." },
+      { "h": "Bases légales", "p": "Exécution du contrat pour les commandes et livraisons. Obligation légale pour la facturation et la conservation fiscale. Consentement pour les e-mails marketing et la mesure d'audience non essentielle, révocable à tout moment. Intérêt légitime pour la prévention de la fraude et la sécurité du site." },
+      { "h": "Destinataires", "p": "Notre prestataire de paiement, le transporteur qui livre votre colis, l'atelier qui exécute votre commande et nos prestataires d'e-mail et d'hébergement — chacun dans la seule mesure nécessaire. Certains sont situés hors de l'Espace économique européen ; ces transferts reposent sur les clauses contractuelles types de la Commission européenne." },
+      { "h": "Durées de conservation", "p": "Données de commande et de facturation pendant dix ans, comme l'exige la loi fiscale. Correspondance pendant trois ans. Consentement marketing jusqu'à son retrait. Données de mesure d'audience pendant quatorze mois." },
+      { "h": "Vos droits", "p": "Accès, rectification, effacement, limitation, portabilité et opposition, ainsi que le droit de saisir votre autorité de contrôle nationale. Écrivez-nous : nous répondons sous trente jours." },
+      { "h": "Cookies", "p": "Les cookies essentiels conservent votre panier, votre langue et votre devise. Les cookies de mesure ne sont déposés qu'après votre acceptation dans le bandeau, et vous pouvez changer d'avis à tout moment depuis ce même bandeau." }
+    ]
+  },
+  "terms": {
+    "title": "Conditions de vente",
+    "lead": "Le contrat entre vous et La Maison Val d'Or.",
+    "sections": [
+      { "h": "Champ d'application", "p": "Ces conditions régissent toute vente conclue via lamaisonvaldor.com. Passer commande vaut acceptation. Elles n'affectent pas les droits impératifs du consommateur de votre pays de résidence." },
+      { "h": "Prix", "p": "Les prix sont affichés dans la devise sélectionnée et incluent la TVA lorsqu'elle s'applique. Les prix convertis sont indicatifs jusqu'au paiement ; le montant confirmé au paiement fait foi. Nous pouvons corriger une erreur de prix manifeste avant expédition ; vous pouvez alors annuler et être remboursé intégralement." },
+      { "h": "Formation du contrat", "p": "Votre commande est une offre. Le contrat est formé lorsque nous envoyons la confirmation d'expédition. Jusque-là, nous pouvons refuser une commande — par exemple si une pierre s'avère indisponible ou si un paiement échoue à la vérification — et rembourser toute somme déjà prélevée." },
+      { "h": "Disponibilité et exécution", "p": "Les pièces sont fabriquées ou libérées par les ateliers partenaires après votre commande. Si une pièce référencée devient indisponible, nous vous prévenons sous deux jours ouvrés et proposons un équivalent, une attente ou un remboursement intégral." },
+      { "h": "Descriptions", "p": "Les poids, couleurs et puretés des pierres sont ceux déclarés par le laboratoire ou l'atelier fournisseur. Les photographies représentent le modèle et les pierres naturelles varient ; une différence d'inclusions ou de saturation à l'intérieur du grade annoncé ne constitue pas un défaut." },
+      { "h": "Rétractation et retours", "p": "Voir la page Retours, qui fait partie intégrante des présentes conditions." },
+      { "h": "Responsabilité", "p": "Rien ici ne limite notre responsabilité en cas de décès, de dommage corporel ou de fraude. Pour le reste, notre responsabilité au titre d'une commande est limitée au montant que vous avez payé." },
+      { "h": "Droit applicable et litiges", "p": "Le droit grec s'applique, sans préjudice des protections impératives de votre pays de résidence. Les consommateurs de l'UE peuvent également recourir à la plateforme de règlement en ligne des litiges de la Commission européenne." }
+    ]
+  },
+  "cookies": {
+    "title": "Politique relative aux cookies",
+    "lead": "En bref : deux cookies pour faire fonctionner la boutique, aucun pour vous suivre sans votre accord.",
+    "sections": [
+      { "h": "Essentiels", "p": "Nous conservons votre langue, votre devise et le contenu de votre panier dans le stockage local de votre navigateur. Ces informations ne sont partagées avec personne et ne peuvent être désactivées sans casser la boutique." },
+      { "h": "Mesure d'audience", "p": "Si vous acceptez dans le bandeau, nous déposons un cookie de mesure anonymisé pour compter les visites et repérer les pages en échec. Il ne conserve ni nom, ni e-mail, ni adresse, et expire après quatorze mois." },
+      { "h": "Changer d'avis", "p": "Effacez les données du site lamaisonvaldor.com dans votre navigateur, ou refusez dans le bandeau. Rien d'autre n'est conservé." }
+    ]
+  }
+}
