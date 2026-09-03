@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Banners from '../components/Banners.astro';
+import { useTranslations, localePath } from '../lib/i18n.js';
+import { locales, getLocale, site, defaultLocale } from '../data/site.config.mjs';
+
+const {
+  lang,
+  title,
+  description,
+  image,
+  /** Path after the language prefix, e.g. 'products/x' — drives hreflang. */
+  route = '',
+  noindex = false,
+  jsonLd = null,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const locale = getLocale(lang);
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || site.url;
+
+const alternates = Object.fromEntries(locales.map((l) => [l.code, localePath(l.code, route)]));
+const canonical = `${siteUrl}${alternates[lang]}`;
+const pageTitle = title ? `${title} — La Maison Val d’Or` : t('meta.siteTitle');
+const pageDescription = description || t('meta.siteDescription');
+const ogImage = image || `${siteUrl}/og-default.svg`;
+---
+<!doctype html>
+<html lang={lang} dir={locale.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+
+    {locales.map((l) => (
+      <link rel="alternate" hreflang={l.hreflang} href={`${siteUrl}${alternates[l.code]}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${alternates[defaultLocale]}`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:locale" content={lang} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1c1713" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap"
+    />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <div class="page-shell">
+      <a class="skip" href="#main">{t('nav.skipToContent')}</a>
+      <Header lang={lang} alternates={alternates} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer lang={lang} />
+    </div>
+    <Banners lang={lang} />
+
+    <script>
+      import '../scripts/store.js';
+
+      // Newsletter: no backend on a static host, so the form defers to email.
+      document.querySelectorAll('[data-newsletter]').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const input = form.querySelector('input[type="email"]');
+          if (!input || !input.checkValidity()) { input?.reportValidity(); return; }
+          const msg = form.parentElement?.querySelector('[data-newsletter-msg]');
+          window.location.href = `mailto:contact@lamaisonvaldor.com?subject=${encodeURIComponent('Newsletter')}&body=${encodeURIComponent(input.value)}`;
+          if (msg) msg.hidden = false;
+          form.reset();
+        });
+      });
+    </script>
+  </body>
+</html>

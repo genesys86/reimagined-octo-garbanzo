@@ -1,0 +1,49 @@
+---
+/**
+ * Language gateway. Static hosts cannot negotiate content, so the page picks a
+ * language from the browser and redirects; the noscript list keeps it crawlable
+ * and usable without JavaScript. Hosts that support _redirects (see public/)
+ * never render this page at all.
+ */
+import { locales, defaultLocale, site } from '../data/site.config.mjs';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || site.url;
+---
+<!doctype html>
+<html lang={defaultLocale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Maison Val d’Or</title>
+    <meta name="description" content="Fine jewellery, certified diamonds and rare gemstones, shipped worldwide." />
+    <link rel="canonical" href={`${siteUrl}/${defaultLocale}/`} />
+    {locales.map((l) => <link rel="alternate" hreflang={l.hreflang} href={`${siteUrl}/${l.code}/`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/${defaultLocale}/`} />
+    <meta http-equiv="refresh" content={`0; url=/${defaultLocale}/`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #1c1713; color: #fbf8f3; font-family: system-ui, sans-serif; }
+      ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+      a { color: #c19a4b; }
+      h1 { font-weight: 400; letter-spacing: .04em; }
+    </style>
+  </head>
+  <body>
+    <div style="text-align:center;padding:2rem">
+      <h1>La Maison Val d’Or</h1>
+      <ul>
+        {locales.map((l) => <li><a href={`/${l.code}/`} hreflang={l.hreflang}>{l.native}</a></li>)}
+      </ul>
+    </div>
+    <script is:inline define:vars={{ codes: locales.map((l) => l.code), fallback: defaultLocale }}>
+      (function () {
+        var stored = null;
+        try { stored = JSON.parse(localStorage.getItem('lmv.lang') || 'null'); } catch (e) { /* blocked */ }
+        var preferred = (navigator.languages || [navigator.language || ''])
+          .map(function (l) { return String(l).slice(0, 2).toLowerCase(); })
+          .find(function (l) { return codes.indexOf(l) !== -1; });
+        var target = codes.indexOf(stored) !== -1 ? stored : preferred || fallback;
+        location.replace('/' + target + '/' + location.search + location.hash);
+      })();
+    </script>
+  </body>
+</html>

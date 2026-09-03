@@ -1,0 +1,100 @@
+{
+  "about": {
+    "title": "Das Haus",
+    "lead": "La Maison Val d'Or gibt es aus einem Grund: Feiner Schmuck wird zum Vierfachen seiner Herstellungskosten verkauft, und fast nichts von dieser Differenz erreicht jene, die die Steine schleifen.",
+    "sections": [
+      { "h": "Wie wir arbeiten", "p": "Wir führen keinen Tresor. Jedes Stück auf dieser Seite gehört einer von uns geprüften Werkstatt — in Antwerpen, Surat, Valenza und Bangkok. Wenn Sie bestellen, vollendet das Atelier das Stück, das Labor zertifiziert es dort, wo eine Zertifizierung vorgesehen ist, und es geht versichert an Ihre Adresse. Sie bezahlen den Stein und die Arbeit, nicht eine Boutique in der Einkaufsstraße." },
+      { "h": "Die Steine", "p": "Wir führen natürliche und im Labor gezüchtete Diamanten nebeneinander und sagen klar, was was ist. Farbedelsteine beschreiben wir nach Art, Behandlung und Herkunft, sofern der Lieferant sie dokumentiert. Trägt ein Stück einen IGI- oder GIA-Bericht, reist dessen Nummer mit dem Paket." },
+      { "h": "Was das für Sie bedeutet", "p": "Die Lieferung dauert sechs bis zwölf Werktage statt bis zum Nachmittag, weil das Stück erst nach Ihrer Bestellung entsteht. Dafür erhalten Sie einen Preis, der das Material abbildet. Wir halten das für einen fairen Tausch und sagen es vor dem Kauf, nicht danach." },
+      { "h": "Schriftliche Zusagen", "p": "Vierzehn Tage Bedenkzeit bei Lagerstücken. Zwei Jahre Garantie gegen Fertigungsfehler. Versicherter Transport in beide Richtungen. Entspricht ein Stein nicht seiner Beschreibung, holen wir das Stück auf unsere Kosten ab und erstatten den vollen Betrag." }
+    ]
+  },
+  "contact": {
+    "title": "Kontakt",
+    "lead": "Wir beantworten jede Nachricht innerhalb eines Werktags, Montag bis Freitag, auf Deutsch, Englisch, Italienisch, Französisch, Spanisch oder Arabisch.",
+    "sections": [
+      { "h": "Bevor Sie schreiben", "p": "Bei einer bereits aufgegebenen Bestellung nennen Sie bitte die Referenz aus Ihrer Bestätigungsmail — so antworten wir in einer Nachricht statt in dreien." },
+      { "h": "Maßanfertigung und Steinsuche", "p": "Suchen Sie einen bestimmten Stein — ein Gewicht, eine Farbklasse, ein Zertifikat — beschreiben Sie ihn, und wir melden uns mit dem, was unsere Ateliers finden können, und zu welchem Preis." }
+    ]
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "lead": "Die Fragen, die unser Kundenservice am häufigsten beantwortet.",
+    "faqs": [
+      { "q": "Sind die Diamanten echt?", "a": "Ja. Wir verkaufen natürliche und im Labor gezüchtete Diamanten, und jede Produktseite sagt, worum es sich handelt. Labordiamanten sind chemisch und optisch identisch mit geförderten Diamanten; sie sind keine Imitate wie Zirkonia oder Moissanit, die wir gesondert kennzeichnen, wenn wir sie führen." },
+      { "q": "Warum dauert die Lieferung sechs bis zwölf Werktage?", "a": "Weil das Stück nach Ihrer Bestellung gefertigt oder freigegeben wird, statt in einem Lager zu liegen. Genau das ermöglicht den Preis. Als vorrätig gekennzeichnete Stücke gehen innerhalb von drei Werktagen raus." },
+      { "q": "In welcher Währung wird abgebucht?", "a": "In der Währung, die Sie oben im Umschalter gewählt haben. Umgerechnete Preise sind Richtwerte und werden täglich aktualisiert; verbindlich ist der an der Kasse bestätigte Betrag." },
+      { "q": "Fallen Zölle an?", "a": "Innerhalb der Europäischen Union nein — die Mehrwertsteuer ist enthalten. Außerhalb der EU legt Ihr Land Einfuhrabgaben und lokale Steuern fest; sie sind bei Lieferung von Ihnen zu tragen. Wir deklarieren jedes Paket mit seinem tatsächlichen Wert und können keine Sendung als Geschenk ausweisen." },
+      { "q": "Kann ich ein Stück zurückgeben?", "a": "Ja, innerhalb von vierzehn Tagen nach Lieferung, ungetragen und in der Verpackung, bei Lagerstücken. Auftragsfertigungen, weitengeänderte Ringe und Gravuren sind ausgenommen, wie es das EU-Verbraucherrecht für personalisierte Waren zulässt." },
+      { "q": "Wie finde ich meine Ringgröße?", "a": "Messen Sie den Innendurchmesser eines Rings, den Sie bereits tragen, und nennen Sie uns den Wert in Millimetern — wir rechnen um. Liegen Sie daneben, ist die erste Weitenänderung bei einem glatten Ring kostenlos." },
+      { "q": "Ist das Paket versichert?", "a": "Jedes Paket reist verfolgt und voll versichert bis zur Unterschrift. Geht es auf dem Transportweg verloren, ersetzen oder erstatten wir es." },
+      { "q": "Gibt es Zertifikate?", "a": "Zertifizierte Stücke werden mit ihrem IGI- oder GIA-Bericht versandt. Die Produktseite weist das ausdrücklich aus; wo kein Bericht genannt ist, wird keiner mitgeliefert." }
+    ]
+  },
+  "shipping": {
+    "title": "Versand",
+    "lead": "Verfolgt und versichert in mehr als hundert Länder.",
+    "sections": [
+      { "h": "Fristen", "p": "Auftragsfertigungen: 6 bis 12 Werktage von der Bestellung bis zur Lieferung. Lagerstücke: 3 bis 6 Werktage. Lose Steine: 4 bis 8 Werktage. Die Sendungsnummer erhalten Sie, sobald das Paket abgeholt wurde." },
+      { "h": "Kosten", "p": "Versicherter Versand ist ab dem in Ihrer Tasche angezeigten Schwellenwert kostenlos. Darunter gilt eine pauschale versicherte Versandgebühr, die vor der Zahlung angezeigt wird. Expresslieferung auf Anfrage." },
+      { "h": "Zölle und Steuern", "p": "Bestellungen innerhalb der Europäischen Union enthalten die Mehrwertsteuer und werden ohne weitere Kosten zugestellt. Bestellungen außerhalb der EU können Einfuhrabgaben und lokale Steuern des Bestimmungslandes auslösen; sie trägt die empfangende Person. Jedes Paket wird mit vollem Wert deklariert." },
+      { "h": "Zustellung", "p": "Alle Pakete erfordern eine Unterschrift. Ist niemand anwesend, hinterlässt der Zusteller eine Benachrichtigung und hält das Paket im örtlichen Depot bereit. Auf Wunsch liefern wir an eine Arbeitsadresse oder eine Abholstation." }
+    ]
+  },
+  "returns": {
+    "title": "Rückgabe & Garantie",
+    "lead": "Vierzehn Tage Bedenkzeit, zwei Jahre gegen Fertigungsfehler.",
+    "sections": [
+      { "h": "Widerrufsrecht", "p": "Wohnen Sie in der Europäischen Union, können Sie den Kauf innerhalb von vierzehn Tagen nach Lieferung ohne Angabe von Gründen widerrufen. Schreiben Sie uns, und wir senden ein vorfrankiertes, versichertes Rücksendeetikett. Das Stück muss ungetragen, vollständig und in der Originalverpackung samt etwaigem Zertifikat sein." },
+      { "h": "Ausnahmen", "p": "Auftragsfertigungen, weitengeänderte Ringe, gravierte Artikel und nach Vorgabe geschliffene Steine sind vom Widerrufsrecht ausgenommen, wie es das EU-Verbraucherrecht für nach Kundenspezifikation gefertigte Waren erlaubt. Dies steht vor der Bestellung auf der Produktseite." },
+      { "h": "Erstattungen", "p": "Sobald die Rücksendung die Werkstatt erreicht und die Prüfung bestanden hat — in der Regel zwei bis vier Werktage nach Abholung — erstatten wir den vollen Betrag innerhalb von fünf Werktagen auf Ihr ursprüngliches Zahlungsmittel." },
+      { "h": "Garantie", "p": "Zwei Jahre gegen Fertigungsfehler: gelöste Fassungen, defekte Verschlüsse, Verlust der Beschichtung bei normalem Tragen. Schäden durch Stoß, Chemikalien oder nicht autorisierte Reparaturen sind ausgenommen. Schreiben Sie uns mit Fotos, wir organisieren die Abholung." }
+    ]
+  },
+  "payment": {
+    "title": "Zahlung",
+    "lead": "Wie und wann abgebucht wird.",
+    "sections": [
+      { "h": "Zahlungsarten", "p": "Karte (Visa, Mastercard, American Express), Apple Pay, Google Pay und Banküberweisung. Hochwertige Stücke können per Überweisung mit Proformarechnung beglichen werden; das organisiert unser Kundenservice." },
+      { "h": "Sicherheit", "p": "Zahlungen wickelt unser Zahlungsdienstleister auf seiner eigenen verschlüsselten Infrastruktur ab. Wir sehen Ihre Kartennummer nie und speichern sie nie." },
+      { "h": "Währung", "p": "Abgebucht wird in der von Ihnen gewählten Währung. Umgerechnete Preise werden täglich anhand veröffentlichter Interbankenkurse aktualisiert und gerundet; Ihre Bank kann eine eigene Umrechnung vornehmen, wenn die Währung von Ihrer Kontowährung abweicht." },
+      { "h": "Rechnungen", "p": "Für jede Bestellung wird eine Rechnung mit ausgewiesener Mehrwertsteuer erstellt und per E-Mail versandt. Geschäftskunden mit Sitz in der EU können vor der Zahlung eine gültige USt-IdNr. angeben, um das Reverse-Charge-Verfahren zu nutzen." }
+    ]
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "lead": "Was wir erheben, wozu, und wie Sie die Löschung verlangen. Diese Erklärung folgt der Verordnung (EU) 2016/679 (DSGVO).",
+    "sections": [
+      { "h": "Verantwortlich", "p": "La Maison Val d'Or ist verantwortlich für die über lamaisonvaldor.com erhobenen personenbezogenen Daten. Für Anliegen zu Ihren Daten schreiben Sie an die auf der Kontaktseite genannte Adresse." },
+      { "h": "Welche Daten", "p": "Bestelldaten (Name, E-Mail, Telefon, Liefer- und Rechnungsanschrift, Bestellinhalt) zur Erfüllung des Kaufvertrags. Kontaktdaten, wenn Sie uns schreiben, um zu antworten. Technische Daten (IP-Adresse, Browser, aufgerufene Seiten) für Sicherheit und Betrieb der Website. Marketingdaten (E-Mail-Adresse) nur bei Anmeldung." },
+      { "h": "Rechtsgrundlagen", "p": "Vertragserfüllung für Bestellung und Lieferung. Rechtliche Verpflichtung für Rechnungsstellung und steuerliche Aufbewahrung. Einwilligung für Marketing-E-Mails und nicht notwendige Analyse, jederzeit widerrufbar. Berechtigtes Interesse für Betrugsprävention und Websitesicherheit." },
+      { "h": "Empfänger", "p": "Unser Zahlungsdienstleister, der zustellende Transporteur, die ausführende Werkstatt sowie unsere E-Mail- und Hosting-Anbieter — jeweils nur im erforderlichen Umfang. Einige befinden sich außerhalb des Europäischen Wirtschaftsraums; diese Übermittlungen stützen sich auf die Standardvertragsklauseln der Europäischen Kommission." },
+      { "h": "Speicherdauer", "p": "Bestell- und Rechnungsdaten zehn Jahre, wie das Steuerrecht verlangt. Schriftverkehr drei Jahre. Marketing-Einwilligung bis zum Widerruf. Analysedaten vierzehn Monate." },
+      { "h": "Ihre Rechte", "p": "Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie das Recht auf Beschwerde bei Ihrer nationalen Aufsichtsbehörde. Schreiben Sie uns; wir antworten innerhalb von dreißig Tagen." },
+      { "h": "Cookies", "p": "Notwendige Cookies speichern Ihre Tasche, Ihre Sprache und Ihre Währung. Analyse-Cookies werden erst nach Ihrer Zustimmung im Banner gesetzt, und Sie können Ihre Entscheidung dort jederzeit ändern." }
+    ]
+  },
+  "terms": {
+    "title": "Verkaufsbedingungen",
+    "lead": "Der Vertrag zwischen Ihnen und La Maison Val d'Or.",
+    "sections": [
+      { "h": "Geltungsbereich", "p": "Diese Bedingungen gelten für jeden über lamaisonvaldor.com geschlossenen Kauf. Mit der Bestellung akzeptieren Sie sie. Zwingende Verbraucherrechte Ihres Wohnsitzlandes bleiben unberührt." },
+      { "h": "Preise", "p": "Preise werden in der gewählten Währung angezeigt und enthalten die Mehrwertsteuer, soweit anwendbar. Umgerechnete Preise sind bis zur Kasse Richtwerte; verbindlich ist der bei der Zahlung bestätigte Betrag. Offensichtliche Preisfehler dürfen wir vor dem Versand korrigieren; Sie können dann stornieren und erhalten den vollen Betrag zurück." },
+      { "h": "Vertragsschluss", "p": "Ihre Bestellung ist ein Angebot. Der Vertrag kommt mit unserer Versandbestätigung zustande. Bis dahin können wir eine Bestellung ablehnen — etwa wenn ein Stein nicht verfügbar ist oder eine Zahlung die Prüfung nicht besteht — und bereits eingezogene Beträge erstatten." },
+      { "h": "Verfügbarkeit und Ausführung", "p": "Stücke werden nach Ihrer Bestellung von Partnerateliers gefertigt oder freigegeben. Wird ein gelistetes Stück nicht verfügbar, informieren wir Sie innerhalb von zwei Werktagen und bieten ein gleichwertiges Stück, eine Wartezeit oder die volle Erstattung an." },
+      { "h": "Beschreibungen", "p": "Gewichte, Farben und Reinheiten der Steine sind die vom liefernden Labor oder Atelier erklärten Angaben. Fotografien zeigen das Modell, und natürliche Steine variieren; eine Abweichung im Einschlussbild oder in der Farbsättigung innerhalb der angegebenen Klasse ist kein Mangel." },
+      { "h": "Widerruf und Rückgabe", "p": "Siehe die Seite Rückgabe, die Bestandteil dieser Bedingungen ist." },
+      { "h": "Haftung", "p": "Nichts hierin beschränkt unsere Haftung für Tod, Körperverletzung oder Arglist. Im Übrigen ist unsere Haftung je Bestellung auf den von Ihnen gezahlten Betrag begrenzt." },
+      { "h": "Recht und Streitbeilegung", "p": "Es gilt griechisches Recht, unbeschadet der zwingenden Schutzvorschriften Ihres Wohnsitzlandes. Verbraucherinnen und Verbraucher in der EU können zudem die Online-Streitbeilegungsplattform der Europäischen Kommission nutzen." }
+    ]
+  },
+  "cookies": {
+    "title": "Cookie-Richtlinie",
+    "lead": "Kurz gesagt: zwei Cookies für den Betrieb des Shops, keines zur Verfolgung, sofern Sie nicht zustimmen.",
+    "sections": [
+      { "h": "Notwendig", "p": "Wir speichern Ihre Sprache, Ihre Währung und den Inhalt Ihrer Tasche im lokalen Speicher Ihres Browsers. Diese Angaben werden mit niemandem geteilt und lassen sich nicht abschalten, ohne den Shop unbrauchbar zu machen." },
+      { "h": "Analyse", "p": "Stimmen Sie im Banner zu, setzen wir ein anonymisiertes Analyse-Cookie, um Besuche zu zählen und fehlerhafte Seiten zu erkennen. Es speichert weder Name noch E-Mail noch Adresse und läuft nach vierzehn Monaten ab." },
+      { "h": "Meinung ändern", "p": "Löschen Sie die Websitedaten für lamaisonvaldor.com in Ihrem Browser, oder lehnen Sie im Banner ab. Mehr wird nicht gespeichert." }
+    ]
+  }
+}

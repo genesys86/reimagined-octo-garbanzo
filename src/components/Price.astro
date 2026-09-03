@@ -1,0 +1,9 @@
+---
+/** Renders a base-currency amount; the client rewrites it on currency change. */
+import { formatMoney } from '../lib/money.js';
+import { getLocale } from '../data/site.config.mjs';
+
+const { amount, lang, currency, class: className = '' } = Astro.props;
+const cur = currency || getLocale(lang).defaultCurrency;
+---
+<span class={className} data-price={amount}>{formatMoney(amount, cur, lang)}</span>

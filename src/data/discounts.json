@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-09-03T22:36:15.191Z",
+  "codes": [
+    {
+      "code": "QT39EDEFQWBQ",
+      "type": "percentage",
+      "value": 45,
+      "appliesTo": "order",
+      "oncePerCustomer": false,
+      "usageLimit": 1,
+      "startsAt": "2026-06-23 18:50:50 +0300",
+      "endsAt": null
+    },
+    {
+      "code": "RGJJ2FATW7SP",
+      "type": "percentage",
+      "value": 15,
+      "appliesTo": "order",
+      "oncePerCustomer": false,
+      "usageLimit": null,
+      "startsAt": "2026-07-11 20:02:25 +0300",
+      "endsAt": null
+    },
+    {
+      "code": "WELCOME10",
+      "type": "percentage",
+      "value": 10,
+      "appliesTo": "order",
+      "oncePerCustomer": false,
+      "usageLimit": null,
+      "startsAt": "2026-07-21 03:00:00 +0300",
+      "endsAt": null
+    }
+  ]
+}

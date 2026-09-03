@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { localeCodes, useTranslations, localePath } from '../../lib/i18n.js';
+import { featuredProducts, collections, productsIn } from '../../lib/catalog.js';
+import { formatMoney } from '../../lib/money.js';
+import { site, getLocale } from '../../data/site.config.mjs';
+
+export function getStaticPaths() {
+  return localeCodes.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+
+const featured = featuredProducts(lang, 8);
+const hero = featured.find((prod) => prod.images.length) || featured[0];
+const giftThreshold = 1500;
+const gifts = productsIn('all')
+  .filter((prod) => prod.price.min <= giftThreshold && prod.images.length)
+  .slice(0, 4);
+
+const usps = ['shipping', 'cert', 'returns', 'pay'];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.brand,
+  url: site.url,
+  email: site.email,
+  sameAs: Object.values(site.social).filter(Boolean),
+};
+---
+<Base lang={lang} route="" jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">{t('home.heroEyebrow')}</p>
+        <h1>{t('home.heroTitle')}</h1>
+        <p class="lede" style="margin-top:1.4rem">{t('home.heroSubtitle')}</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href={p('collections', 'all')}>{t('home.heroCta')}</a>
+          <a class="btn btn-light" href={p('pages', 'contact')} style="background:transparent">{t('home.heroCtaSecondary')}</a>
+        </div>
+      </div>
+      {hero?.images[0] && (
+        <div class="hero-media">
+          <img src={hero.images[0].src} alt={hero.title} width="900" height="1125" fetchpriority="high" decoding="async" />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span>{t('usp.shippingTitle')}</span>
+      <span>{t('usp.certTitle')}</span>
+      <span>{t('usp.returnsTitle')}</span>
+      <span>{t('usp.payTitle')}</span>
+    </div>
+  </div>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t('home.featuredTitle')}</p>
+        <h2>{t('home.featuredSubtitle')}</h2>
+      </div>
+      <a class="link-line" href={p('collections', 'all')}>{t('common.viewAll')}</a>
+    </div>
+    <div class="grid">
+      {featured.map((prod, i) => <ProductCard product={prod} lang={lang} eager={i < 4} />)}
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--sand)">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">{t('collections.title')}</p>
+          <h2>{t('home.collectionsTitle')}</h2>
+          <p class="lede" style="margin-top:.8rem">{t('home.collectionsSubtitle')}</p>
+        </div>
+      </div>
+      <div class="grid">
+        {collections.map((c) => (
+          <a class="card" href={p('collections', c.slug)}>
+            <div class="card-media">
+              {c.cover && <img src={c.cover} alt="" loading="lazy" decoding="async" width="600" height="600" />}
+            </div>
+            <div class="card-body">
+              <span class="card-title">{t(`collections.${c.slug}`)}</span>
+              <span class="card-meta">{c.count} {t('collections.pieces')}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">{t('home.newArrivals')}</p>
+        <h2>{t('home.underTitle', { amount: formatMoney(giftThreshold, getLocale(lang).defaultCurrency, lang) })}</h2>
+      </div>
+      <a class="link-line" href={p('collections', 'all')}>{t('common.viewAll')}</a>
+    </div>
+    <div class="grid">
+      {gifts.map((prod) => <ProductCard product={prod} lang={lang} />)}
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--deep);color:#fff">
+    <div class="wrap" style="display:grid;gap:2.4rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center">
+      <div>
+        <p class="eyebrow">{t('nav.about')}</p>
+        <h2 style="color:#fff">{t('home.storyTitle')}</h2>
+        <p class="lede" style="color:rgba(255,255,255,.78);margin-top:1.2rem">{t('home.storyBody')}</p>
+        <a class="btn btn-light" href={p('pages', 'about')} style="margin-top:1.4rem">{t('home.storyCta')}</a>
+      </div>
+      <div class="usp">
+        {usps.map((key) => (
+          <div>
+            <h3 style="color:#fff">{t(`usp.${key}Title`)}</h3>
+            <p style="color:rgba(255,255,255,.62)">{t(`usp.${key}Body`)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

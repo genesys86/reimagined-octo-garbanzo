@@ -1,0 +1,100 @@
+{
+  "about": {
+    "title": "The Maison",
+    "lead": "La Maison Val d'Or exists for one reason: fine jewellery is sold at four times what it costs to make, and almost none of that difference reaches the people who cut the stones.",
+    "sections": [
+      { "h": "How we work", "p": "We do not keep a vault. Every piece on this site belongs to a workshop we have vetted — in Antwerp, Surat, Valenza and Bangkok. When you order, the atelier finishes the piece, the laboratory certifies it where certification applies, and it ships insured to your address. You pay for the stone and the work, not for a boutique on a shopping street." },
+      { "h": "The stones", "p": "We list natural and laboratory-grown diamonds side by side and say plainly which is which. Coloured stones are described by species, treatment and origin whenever the supplier documents them. Where a piece carries an IGI or GIA report, the report number travels with the parcel." },
+      { "h": "What that means for you", "p": "Delivery takes six to twelve working days rather than the same afternoon, because the piece is made after you order it. In exchange you get a price that reflects the material. We think that is a fair trade, and we say so before you buy rather than after." },
+      { "h": "Written guarantees", "p": "Fourteen days to change your mind on stock pieces. A two-year guarantee against manufacturing defects. Insured transport in both directions. If a stone does not match its description, we collect the piece at our cost and refund in full." }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "A client adviser answers every message within one business day, Monday to Friday, in English, Italian, French, Spanish, German or Arabic.",
+    "sections": [
+      { "h": "Before you write", "p": "For an order already placed, quote the reference in your confirmation email — it lets us answer in one message instead of three." },
+      { "h": "Bespoke and sourcing", "p": "If you are looking for a specific stone — a weight, a colour grade, a certificate — describe it and we will come back with what our ateliers can find and at what price." }
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "lead": "The questions our client advisers answer most often.",
+    "faqs": [
+      { "q": "Are the diamonds real?", "a": "Yes. We sell natural diamonds and laboratory-grown diamonds, and each listing states which one it is. Laboratory-grown diamonds are chemically and optically identical to mined diamonds; they are not simulants such as cubic zirconia or moissanite, which we label separately when we sell them." },
+      { "q": "Why is delivery six to twelve working days?", "a": "Because the piece is made or released after your order rather than sitting in a warehouse. That is what allows the price. Stock pieces marked as such leave within three working days." },
+      { "q": "In which currency am I charged?", "a": "In the currency shown in the switcher at the top of the page. Converted prices are indicative and refreshed daily; the amount confirmed at checkout is the amount you pay." },
+      { "q": "Do I pay customs duties?", "a": "Inside the European Union, no — VAT is included. Outside it, import duties and local taxes are set by your country and are payable by you on delivery. We declare every parcel at its true value; we cannot mark shipments as gifts." },
+      { "q": "Can I return a piece?", "a": "Yes, within fourteen days of delivery, unworn and in its packaging, on stock pieces. Made-to-order, resized and engraved pieces are excluded, as EU consumer law allows for personalised goods." },
+      { "q": "How do I know my ring size?", "a": "Measure the inner diameter of a ring you already wear and tell us the figure in millimetres — we convert it. If you are wrong, the first resize on a plain band is free." },
+      { "q": "Is the parcel insured?", "a": "Every parcel travels tracked and fully insured until it is signed for. If it is lost in transit, we replace or refund it." },
+      { "q": "Do you offer certificates?", "a": "Certified pieces ship with their IGI or GIA report. The listing says so explicitly; where no report is mentioned, none is supplied." }
+    ]
+  },
+  "shipping": {
+    "title": "Shipping",
+    "lead": "Tracked and insured to more than one hundred countries.",
+    "sections": [
+      { "h": "Times", "p": "Made-to-order pieces: 6 to 12 working days from order to delivery. Stock pieces: 3 to 6 working days. Loose stones: 4 to 8 working days. You receive a tracking number the moment the parcel is collected." },
+      { "h": "Cost", "p": "Free insured shipping above the threshold shown in your bag. Below it, a flat insured shipping fee applies and is displayed before payment. Express delivery is available on request." },
+      { "h": "Duties and taxes", "p": "Orders inside the European Union include VAT and clear without further charge. Orders outside the EU may attract import duties and local taxes set by the destination country; these are payable by the recipient. Every parcel is declared at its full value." },
+      { "h": "Delivery", "p": "All parcels require a signature. If nobody is present, the carrier leaves a card and holds the parcel at the local depot. We can ship to a workplace or a carrier pick-up point if that is easier." }
+    ]
+  },
+  "returns": {
+    "title": "Returns & guarantee",
+    "lead": "Fourteen days to change your mind, two years against manufacturing defects.",
+    "sections": [
+      { "h": "Right of withdrawal", "p": "If you are resident in the European Union you may withdraw from the purchase within fourteen days of delivery without giving a reason. Write to us and we send a prepaid, insured return label. The piece must be unworn, complete and in its original packaging with any certificate." },
+      { "h": "Exclusions", "p": "Made-to-order pieces, resized rings, engraved items and loose stones cut to a specification are excluded from the right of withdrawal, as EU consumer law permits for goods made to the customer's specification. This is stated on the product page before you order." },
+      { "h": "Refunds", "p": "Once the return reaches the workshop and passes inspection — usually two to four working days after collection — we refund the full amount to your original payment method within five working days." },
+      { "h": "Guarantee", "p": "Two years against manufacturing defects: setting failure, clasp failure, plating loss under normal wear. Damage from impact, chemicals or unauthorised repair is not covered. Write to us with photographs and we arrange collection." }
+    ]
+  },
+  "payment": {
+    "title": "Payment",
+    "lead": "How and when you are charged.",
+    "sections": [
+      { "h": "Methods", "p": "Card (Visa, Mastercard, American Express), Apple Pay, Google Pay and bank transfer. High-value pieces can be settled by bank transfer with a proforma invoice; a client adviser will arrange it." },
+      { "h": "Security", "p": "Payments are processed by our payment provider on their own encrypted infrastructure. We never see and never store your card number." },
+      { "h": "Currency", "p": "You are charged in the currency you selected. Converted prices are refreshed daily from published interbank rates and rounded; your bank may apply its own conversion if the currency differs from your account currency." },
+      { "h": "Invoices", "p": "A VAT invoice is issued for every order and sent by email. Business customers inside the EU can supply a valid VAT number before payment for reverse-charge treatment." }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "lead": "What we collect, why, and how to make us delete it. This policy follows Regulation (EU) 2016/679 (GDPR).",
+    "sections": [
+      { "h": "Who is responsible", "p": "La Maison Val d'Or is the data controller for personal data collected through lamaisonvaldor.com. Write to the address on the contact page for any request concerning your data." },
+      { "h": "What we collect", "p": "Order data (name, email, telephone, delivery and billing address, order contents) to perform the sales contract. Contact data when you write to us, to answer you. Technical data (IP address, browser, pages viewed) to keep the site secure and working. Marketing data (email address) only if you subscribe." },
+      { "h": "Legal bases", "p": "Performance of a contract for orders and delivery. Legal obligation for invoicing and tax retention. Consent for marketing emails and non-essential analytics, withdrawable at any time. Legitimate interest for fraud prevention and site security." },
+      { "h": "Who receives it", "p": "Our payment provider, the carrier delivering your parcel, the workshop fulfilling your order, and our email and hosting providers — each only to the extent needed. Some are outside the European Economic Area; those transfers rely on the European Commission's standard contractual clauses." },
+      { "h": "How long we keep it", "p": "Order and invoicing data for ten years, as tax law requires. Contact correspondence for three years. Marketing consent until you withdraw it. Analytics data for fourteen months." },
+      { "h": "Your rights", "p": "Access, rectification, erasure, restriction, portability and objection, plus the right to complain to your national supervisory authority. Write to us and we answer within thirty days." },
+      { "h": "Cookies", "p": "Essential cookies keep your bag, your language and your currency. Analytics cookies are set only after you accept them in the banner, and you can change your mind from that banner at any time." }
+    ]
+  },
+  "terms": {
+    "title": "Terms of sale",
+    "lead": "The contract between you and La Maison Val d'Or.",
+    "sections": [
+      { "h": "Scope", "p": "These terms govern every sale concluded through lamaisonvaldor.com. Placing an order means you accept them. They do not affect the mandatory consumer rights of your country of residence." },
+      { "h": "Prices", "p": "Prices are shown in the currency you select and include VAT where applicable. Converted prices are indicative until checkout; the amount confirmed at payment is binding. We may correct manifest pricing errors before dispatch, in which case you may cancel and be refunded in full." },
+      { "h": "Formation of contract", "p": "Your order is an offer. The contract is formed when we send the dispatch confirmation. Until then we may decline an order — for example where a stone proves unavailable or a payment fails verification — and refund any amount already taken." },
+      { "h": "Availability and fulfilment", "p": "Pieces are made or released by partner ateliers after your order. Where a listed piece becomes unavailable we tell you within two business days and offer an equivalent, a wait, or a full refund." },
+      { "h": "Descriptions", "p": "Stone weights, colours and clarities are those declared by the supplying laboratory or workshop. Photographs are of the model, and natural stones vary; a variation in inclusion pattern or colour saturation within the stated grade is not a defect." },
+      { "h": "Withdrawal and returns", "p": "See the Returns page, which forms part of these terms." },
+      { "h": "Liability", "p": "Nothing here limits our liability for death, personal injury or fraud. Otherwise our liability for any order is limited to the amount you paid for it." },
+      { "h": "Law and disputes", "p": "Greek law applies, without prejudice to the mandatory protections of your country of residence. EU consumers may also use the European Commission's online dispute resolution platform." }
+    ]
+  },
+  "cookies": {
+    "title": "Cookie policy",
+    "lead": "The short version: two cookies to run the shop, none to follow you around unless you say yes.",
+    "sections": [
+      { "h": "Essential", "p": "We store your chosen language, your chosen currency and the contents of your bag in your browser's local storage. This is not shared with anyone and cannot be switched off without breaking the shop." },
+      { "h": "Analytics", "p": "If you accept in the banner, we set an anonymised analytics cookie to count visits and see which pages fail. It stores no name, email or address, and expires after fourteen months." },
+      { "h": "Changing your mind", "p": "Clear your browser's site data for lamaisonvaldor.com, or reject in the banner. Nothing else is stored." }
+    ]
+  }
+}

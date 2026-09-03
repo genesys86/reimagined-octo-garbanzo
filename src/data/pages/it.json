@@ -1,0 +1,100 @@
+{
+  "about": {
+    "title": "La Maison",
+    "lead": "La Maison Val d'Or nasce per una ragione precisa: l'alta gioielleria si vende a quattro volte il suo costo di produzione, e quasi nulla di quella differenza arriva a chi taglia le pietre.",
+    "sections": [
+      { "h": "Come lavoriamo", "p": "Non abbiamo un caveau. Ogni pezzo su questo sito appartiene a un laboratorio che abbiamo verificato — ad Anversa, Surat, Valenza e Bangkok. Quando ordini, l'atelier rifinisce il pezzo, il laboratorio lo certifica dove la certificazione è prevista, e la spedizione parte assicurata verso il tuo indirizzo. Paghi la pietra e il lavoro, non una boutique in centro." },
+      { "h": "Le pietre", "p": "Elenchiamo diamanti naturali e di laboratorio fianco a fianco, dicendo chiaramente quale sia quale. Le pietre di colore sono descritte per specie, trattamento e origine ogni volta che il fornitore le documenta. Quando un pezzo ha un certificato IGI o GIA, il numero del certificato viaggia con il pacco." },
+      { "h": "Che cosa significa per te", "p": "La consegna richiede da sei a dodici giorni lavorativi anziché lo stesso pomeriggio, perché il pezzo viene realizzato dopo il tuo ordine. In cambio ottieni un prezzo che riflette il materiale. Ci sembra uno scambio onesto, e lo diciamo prima dell'acquisto e non dopo." },
+      { "h": "Garanzie scritte", "p": "Quattordici giorni per ripensarci sui pezzi a magazzino. Due anni di garanzia contro i difetti di fabbricazione. Trasporto assicurato in entrambe le direzioni. Se una pietra non corrisponde alla descrizione, ritiriamo il pezzo a nostre spese e rimborsiamo per intero." }
+    ]
+  },
+  "contact": {
+    "title": "Contatti",
+    "lead": "Un consulente risponde a ogni messaggio entro un giorno lavorativo, dal lunedì al venerdì, in italiano, inglese, francese, spagnolo, tedesco o arabo.",
+    "sections": [
+      { "h": "Prima di scriverci", "p": "Per un ordine già effettuato, indica il riferimento presente nell'email di conferma: ci permette di risponderti con un solo messaggio invece di tre." },
+      { "h": "Su misura e ricerca pietre", "p": "Se cerchi una pietra specifica — un peso, un grado di colore, un certificato — descrivicela e ti diremo che cosa possono trovare i nostri atelier e a quale prezzo." }
+    ]
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "lead": "Le domande a cui i nostri consulenti rispondono più spesso.",
+    "faqs": [
+      { "q": "I diamanti sono veri?", "a": "Sì. Vendiamo diamanti naturali e diamanti di laboratorio, e ogni scheda indica di quale si tratta. I diamanti di laboratorio sono chimicamente e otticamente identici a quelli estratti; non sono simulanti come la zirconia cubica o la moissanite, che etichettiamo separatamente quando le vendiamo." },
+      { "q": "Perché la consegna richiede da sei a dodici giorni lavorativi?", "a": "Perché il pezzo viene realizzato o rilasciato dopo il tuo ordine invece di restare in magazzino. È questo che rende possibile il prezzo. I pezzi indicati come disponibili partono entro tre giorni lavorativi." },
+      { "q": "In quale valuta vengo addebitato?", "a": "Nella valuta selezionata nel selettore in alto. I prezzi convertiti sono indicativi e aggiornati ogni giorno; l'importo confermato al checkout è quello che paghi." },
+      { "q": "Devo pagare dazi doganali?", "a": "All'interno dell'Unione Europea no, l'IVA è inclusa. Fuori dall'UE, dazi e imposte locali sono stabiliti dal tuo paese e sono a tuo carico alla consegna. Dichiariamo ogni pacco al suo valore reale: non possiamo indicarlo come regalo." },
+      { "q": "Posso restituire un pezzo?", "a": "Sì, entro quattordici giorni dalla consegna, non indossato e nella sua confezione, per i pezzi a magazzino. Sono esclusi i pezzi su ordinazione, ridimensionati o incisi, come consente il diritto europeo dei consumatori per i beni personalizzati." },
+      { "q": "Come faccio a sapere la mia misura dell'anello?", "a": "Misura il diametro interno di un anello che già indossi e comunicaci il valore in millimetri: alla conversione pensiamo noi. Se sbagli, il primo ridimensionamento su una fede liscia è gratuito." },
+      { "q": "Il pacco è assicurato?", "a": "Ogni pacco viaggia tracciato e interamente assicurato fino alla firma. Se va perso durante il trasporto, lo sostituiamo o lo rimborsiamo." },
+      { "q": "Fornite certificati?", "a": "I pezzi certificati vengono spediti con il loro rapporto IGI o GIA. La scheda prodotto lo indica esplicitamente; dove non è menzionato alcun certificato, non ne viene fornito." }
+    ]
+  },
+  "shipping": {
+    "title": "Spedizioni",
+    "lead": "Tracciate e assicurate in più di cento paesi.",
+    "sections": [
+      { "h": "Tempi", "p": "Pezzi su ordinazione: da 6 a 12 giorni lavorativi dall'ordine alla consegna. Pezzi a magazzino: da 3 a 6 giorni lavorativi. Pietre sciolte: da 4 a 8 giorni lavorativi. Ricevi il numero di tracciamento nel momento in cui il pacco viene ritirato." },
+      { "h": "Costo", "p": "Spedizione assicurata gratuita sopra la soglia indicata nella tua borsa. Sotto quella soglia si applica una tariffa fissa assicurata, mostrata prima del pagamento. La consegna espressa è disponibile su richiesta." },
+      { "h": "Dazi e imposte", "p": "Gli ordini all'interno dell'Unione Europea includono l'IVA e non comportano ulteriori addebiti. Gli ordini fuori dall'UE possono essere soggetti a dazi e imposte locali stabiliti dal paese di destinazione, a carico del destinatario. Ogni pacco è dichiarato al suo pieno valore." },
+      { "h": "Consegna", "p": "Tutti i pacchi richiedono una firma. Se non c'è nessuno, il corriere lascia un avviso e trattiene il pacco presso la filiale locale. Possiamo spedire in ufficio o presso un punto di ritiro, se è più comodo." }
+    ]
+  },
+  "returns": {
+    "title": "Resi e garanzia",
+    "lead": "Quattordici giorni per ripensarci, due anni contro i difetti di fabbricazione.",
+    "sections": [
+      { "h": "Diritto di recesso", "p": "Se risiedi nell'Unione Europea puoi recedere dall'acquisto entro quattordici giorni dalla consegna senza doverne indicare il motivo. Scrivici e ti inviamo un'etichetta di reso prepagata e assicurata. Il pezzo deve essere non indossato, completo e nella confezione originale con l'eventuale certificato." },
+      { "h": "Esclusioni", "p": "Pezzi su ordinazione, anelli ridimensionati, articoli incisi e pietre tagliate su specifica sono esclusi dal diritto di recesso, come il diritto europeo dei consumatori consente per i beni realizzati su misura. È indicato nella scheda prodotto prima dell'ordine." },
+      { "h": "Rimborsi", "p": "Una volta che il reso raggiunge il laboratorio e supera il controllo — di norma da due a quattro giorni lavorativi dopo il ritiro — rimborsiamo l'intero importo sul metodo di pagamento originale entro cinque giorni lavorativi." },
+      { "h": "Garanzia", "p": "Due anni contro i difetti di fabbricazione: cedimento della montatura, rottura della chiusura, perdita del bagno galvanico in condizioni d'uso normali. Non sono coperti i danni da urto, agenti chimici o riparazioni non autorizzate. Scrivici con delle fotografie e organizziamo il ritiro." }
+    ]
+  },
+  "payment": {
+    "title": "Pagamenti",
+    "lead": "Come e quando avviene l'addebito.",
+    "sections": [
+      { "h": "Metodi", "p": "Carta (Visa, Mastercard, American Express), Apple Pay, Google Pay e bonifico bancario. I pezzi di valore elevato possono essere regolati con bonifico e fattura proforma; se ne occupa un consulente." },
+      { "h": "Sicurezza", "p": "I pagamenti sono gestiti dal nostro fornitore sulla sua infrastruttura cifrata. Non vediamo e non conserviamo mai il numero della tua carta." },
+      { "h": "Valuta", "p": "L'addebito avviene nella valuta che hai selezionato. I prezzi convertiti sono aggiornati ogni giorno su tassi interbancari pubblicati e arrotondati; la tua banca può applicare una propria conversione se la valuta è diversa da quella del tuo conto." },
+      { "h": "Fatture", "p": "Per ogni ordine viene emessa una fattura con IVA, inviata via email. I clienti business con sede nell'UE possono comunicare una partita IVA valida prima del pagamento per il regime di inversione contabile." }
+    ]
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy",
+    "lead": "Che cosa raccogliamo, perché, e come farcelo cancellare. Questa informativa segue il Regolamento (UE) 2016/679 (GDPR).",
+    "sections": [
+      { "h": "Chi è il titolare", "p": "La Maison Val d'Or è il titolare del trattamento dei dati personali raccolti tramite lamaisonvaldor.com. Scrivi all'indirizzo indicato nella pagina Contatti per qualsiasi richiesta relativa ai tuoi dati." },
+      { "h": "Che cosa raccogliamo", "p": "Dati dell'ordine (nome, email, telefono, indirizzo di consegna e fatturazione, contenuto dell'ordine) per eseguire il contratto di vendita. Dati di contatto quando ci scrivi, per risponderti. Dati tecnici (indirizzo IP, browser, pagine visitate) per la sicurezza e il funzionamento del sito. Dati di marketing (indirizzo email) solo se ti iscrivi." },
+      { "h": "Basi giuridiche", "p": "Esecuzione del contratto per ordini e consegne. Obbligo legale per fatturazione e conservazione fiscale. Consenso per email di marketing e analitici non essenziali, revocabile in qualsiasi momento. Legittimo interesse per la prevenzione delle frodi e la sicurezza del sito." },
+      { "h": "Chi li riceve", "p": "Il nostro fornitore di pagamenti, il corriere che consegna il pacco, il laboratorio che evade l'ordine e i nostri fornitori di email e hosting — ciascuno solo per quanto necessario. Alcuni si trovano fuori dallo Spazio economico europeo; tali trasferimenti si basano sulle clausole contrattuali tipo della Commissione europea." },
+      { "h": "Per quanto tempo", "p": "Dati di ordine e fatturazione per dieci anni, come richiede la normativa fiscale. Corrispondenza per tre anni. Consenso marketing fino alla revoca. Dati analitici per quattordici mesi." },
+      { "h": "I tuoi diritti", "p": "Accesso, rettifica, cancellazione, limitazione, portabilità e opposizione, oltre al diritto di reclamo all'autorità di controllo nazionale. Scrivici e rispondiamo entro trenta giorni." },
+      { "h": "Cookie", "p": "I cookie essenziali conservano la tua borsa, la tua lingua e la tua valuta. I cookie analitici vengono impostati solo dopo la tua accettazione nel banner, e puoi cambiare idea in qualsiasi momento dallo stesso banner." }
+    ]
+  },
+  "terms": {
+    "title": "Condizioni di vendita",
+    "lead": "Il contratto tra te e La Maison Val d'Or.",
+    "sections": [
+      { "h": "Ambito", "p": "Queste condizioni regolano ogni vendita conclusa tramite lamaisonvaldor.com. Effettuare un ordine significa accettarle. Non incidono sui diritti inderogabili del consumatore previsti dal tuo paese di residenza." },
+      { "h": "Prezzi", "p": "I prezzi sono indicati nella valuta selezionata e includono l'IVA dove applicabile. I prezzi convertiti sono indicativi fino al checkout; l'importo confermato al pagamento è vincolante. Possiamo correggere errori di prezzo manifesti prima della spedizione: in tal caso puoi annullare ed essere rimborsato per intero." },
+      { "h": "Conclusione del contratto", "p": "Il tuo ordine è una proposta. Il contratto si perfeziona quando inviamo la conferma di spedizione. Fino a quel momento possiamo rifiutare un ordine — per esempio se una pietra risulta non disponibile o un pagamento non supera la verifica — rimborsando quanto già addebitato." },
+      { "h": "Disponibilità ed evasione", "p": "I pezzi sono realizzati o rilasciati dagli atelier partner dopo il tuo ordine. Se un pezzo elencato non è più disponibile te lo comunichiamo entro due giorni lavorativi offrendo un equivalente, un'attesa o il rimborso totale." },
+      { "h": "Descrizioni", "p": "Pesi, colori e purezze delle pietre sono quelli dichiarati dal laboratorio o dal produttore. Le fotografie ritraggono il modello e le pietre naturali variano; una differenza nel disegno delle inclusioni o nella saturazione del colore all'interno del grado dichiarato non costituisce un difetto." },
+      { "h": "Recesso e resi", "p": "Vedi la pagina Resi, che è parte integrante di queste condizioni." },
+      { "h": "Responsabilità", "p": "Nulla in queste condizioni limita la nostra responsabilità per morte, lesioni personali o dolo. Per il resto, la nostra responsabilità per ciascun ordine è limitata all'importo pagato." },
+      { "h": "Legge e controversie", "p": "Si applica la legge greca, fatte salve le tutele inderogabili del tuo paese di residenza. I consumatori dell'UE possono inoltre ricorrere alla piattaforma di risoluzione delle controversie online della Commissione europea." }
+    ]
+  },
+  "cookies": {
+    "title": "Politica sui cookie",
+    "lead": "In breve: due cookie per far funzionare il negozio, nessuno per seguirti in giro se non lo autorizzi.",
+    "sections": [
+      { "h": "Essenziali", "p": "Conserviamo la lingua scelta, la valuta scelta e il contenuto della borsa nella memoria locale del tuo browser. Non vengono condivisi con nessuno e non possono essere disattivati senza compromettere il negozio." },
+      { "h": "Analitici", "p": "Se accetti nel banner, impostiamo un cookie analitico anonimizzato per contare le visite e capire quali pagine non funzionano. Non conserva nome, email o indirizzo e scade dopo quattordici mesi." },
+      { "h": "Cambiare idea", "p": "Cancella i dati del sito lamaisonvaldor.com dal tuo browser, oppure rifiuta nel banner. Non viene conservato nient'altro." }
+    ]
+  }
+}

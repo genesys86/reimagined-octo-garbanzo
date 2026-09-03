@@ -1,0 +1,68 @@
+---
+import { localePath, useTranslations } from '../lib/i18n.js';
+import { site, checkoutMode } from '../data/site.config.mjs';
+import { ratesUpdatedAt } from '../lib/money.js';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const year = new Date().getFullYear();
+const ratesDate = new Date(ratesUpdatedAt).toISOString().slice(0, 10);
+
+const shopLinks = [
+  { href: p('collections', 'all'), label: t('collections.all') },
+  { href: p('collections', 'rings'), label: t('collections.rings') },
+  { href: p('collections', 'necklaces'), label: t('collections.necklaces') },
+  { href: p('collections', 'gemstones'), label: t('collections.gemstones') },
+];
+const helpLinks = [
+  { href: p('pages', 'shipping'), label: t('usp.shippingTitle') },
+  { href: p('pages', 'returns'), label: t('usp.returnsTitle') },
+  { href: p('pages', 'payment'), label: t('checkout.title') },
+  { href: p('pages', 'faq'), label: t('product.faq') },
+  { href: p('pages', 'contact'), label: t('nav.contact') },
+];
+const legalLinks = [
+  { href: p('pages', 'privacy'), label: t('cookies.settings') },
+  { href: p('pages', 'terms'), label: t('footer.legal') },
+  { href: p('pages', 'cookies'), label: 'Cookies' },
+];
+---
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">La Maison Val d’Or</p>
+      <p class="small" style="max-width:34ch">{t('footer.tagline')}</p>
+      <form class="newsletter-form" data-newsletter novalidate>
+        <label class="visually-hidden" for="nl-email">{t('home.newsletterPlaceholder')}</label>
+        <input id="nl-email" type="email" name="email" required placeholder={t('home.newsletterPlaceholder')} />
+        <button class="btn btn-light btn-sm" type="submit">{t('home.newsletterCta')}</button>
+      </form>
+      <p class="small" data-newsletter-msg hidden>{t('home.newsletterThanks')}</p>
+    </div>
+
+    <div>
+      <h4>{t('footer.shop')}</h4>
+      <ul>{shopLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </div>
+
+    <div>
+      <h4>{t('footer.help')}</h4>
+      <ul>{helpLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </div>
+
+    <div>
+      <h4>{t('footer.legal')}</h4>
+      <ul>
+        {legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>© {year} {site.legalName}. {t('footer.rights')}</span>
+    <span class="small">{t('footer.vatNote')}</span>
+    <span class="small">FX {ratesDate} · {checkoutMode === 'stripe' ? 'Stripe' : 'Concierge'}</span>
+  </div>
+</footer>

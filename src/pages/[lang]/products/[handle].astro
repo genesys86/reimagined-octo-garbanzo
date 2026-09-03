@@ -1,0 +1,340 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import Price from '../../../components/Price.astro';
+import { localeCodes, useTranslations, localePath } from '../../../lib/i18n.js';
+import { products, getProduct, relatedProducts, hasTranslations } from '../../../lib/catalog.js';
+import { formatMoney } from '../../../lib/money.js';
+import { baseCurrency, getLocale, freeShippingThreshold, site, checkoutMode } from '../../../data/site.config.mjs';
+
+export function getStaticPaths() {
+  return localeCodes.flatMap((lang) => products.map((prod) => ({ params: { lang, handle: prod.handle } })));
+}
+
+const { lang, handle } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const currency = getLocale(lang).defaultCurrency;
+
+const product = getProduct(handle, lang);
+const related = relatedProducts(product, lang, 4);
+const primaryCollection = product.collections[0];
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || site.url;
+
+const discount = product.price.compareAt && product.price.compareAt > product.price.min
+  ? Math.round((1 - product.price.min / product.price.compareAt) * 100)
+  : 0;
+
+const specs = product.specs.map((s) => ({
+  label: s.key ? t(`specs.${s.key}`) : s.label,
+  value: s.value,
+}));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.title,
+  description: product.seoDescription,
+  image: product.images.slice(0, 6).map((i) => i.src),
+  brand: { '@type': 'Brand', name: site.brand },
+  sku: product.variants[0]?.sku || product.handle,
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: baseCurrency,
+    lowPrice: product.price.min,
+    highPrice: product.price.max,
+    offerCount: product.variants.length,
+    availability: 'https://schema.org/InStock',
+    url: `${siteUrl}${p('products', product.handle)}`,
+  },
+  ...(product.faqs.length && {
+    subjectOf: {
+      '@type': 'FAQPage',
+      mainEntity: product.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  }),
+};
+
+const showTranslationNote = lang !== 'en' && !hasTranslations(lang);
+---
+<Base
+  lang={lang}
+  route={`products/${handle}`}
+  title={product.seoTitle}
+  description={product.seoDescription}
+  image={product.images[0]?.src}
+  jsonLd={jsonLd}
+>
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={p()}>{t('nav.home')}</a><span>/</span>
+      <a href={p('collections', primaryCollection)}>{t(`collections.${primaryCollection}`)}</a><span>/</span>
+      <span>{product.title}</span>
+    </nav>
+  </div>
+
+  <section class="wrap section-tight">
+    <div class="pdp">
+      <div class="gallery">
+        <div class="thumbs" role="tablist" aria-label={t('product.description')}>
+          {product.images.slice(0, 12).map((img, i) => (
+            <button type="button" role="tab" data-thumb={i} aria-current={i === 0 ? 'true' : 'false'} aria-label={t('product.imageOf', { n: i + 1, total: Math.min(product.images.length, 12) })}>
+              <img src={img.src} alt="" loading="lazy" decoding="async" width="150" height="150" style="width:100%;height:100%;object-fit:cover" />
+            </button>
+          ))}
+        </div>
+        <div class="gallery-main">
+          {product.images[0] && (
+            <img
+              data-gallery-main
+              src={product.images[0].src}
+              alt={product.images[0].alt || product.title}
+              width="1000"
+              height="1000"
+              fetchpriority="high"
+              decoding="async"
+            />
+          )}
+        </div>
+      </div>
+
+      <div class="pdp-info">
+        {product.tagline && <p class="eyebrow">{product.tagline}</p>}
+        <h1 style="font-size:clamp(1.7rem,3vw,2.5rem)">{product.title}</h1>
+
+        <div class="price-row">
+          <Price amount={product.price.min} lang={lang} class="price" />
+          {discount > 0 && (
+            <>
+              <Price amount={product.price.compareAt} lang={lang} class="price-was" />
+              <span class="badge badge-gold" style="position:static">{t('product.save', { percent: discount })}</span>
+            </>
+          )}
+        </div>
+
+        <p class="small muted" style="margin-top:-.6rem">
+          {t('product.madeToOrder')} · {t('product.vatNote')}
+        </p>
+
+        <form data-buy-form style="margin-top:1.8rem">
+          {product.options.map((opt, index) => (
+            <div class="option-group" data-option-index={index}>
+              <span class="option-label">{opt.name}</span>
+              <div class="option-values">
+                {opt.values.map((value, vi) => (
+                  <button
+                    class="chip"
+                    type="button"
+                    data-option-value={value}
+                    aria-pressed={vi === 0 ? 'true' : 'false'}
+                  >{value}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div class="option-group" style="max-width:8rem">
+            <span class="option-label">{t('product.quantity')}</span>
+            <div class="qty">
+              <button type="button" data-qty="-1" aria-label="-">−</button>
+              <input type="number" min="1" max="20" value="1" data-qty-input aria-label={t('product.quantity')} />
+              <button type="button" data-qty="1" aria-label="+">+</button>
+            </div>
+          </div>
+
+          <button class="btn btn-block" type="submit" data-add-to-cart>
+            {checkoutMode === 'stripe' ? t('product.addToCart') : t('product.addToEnquiry')}
+          </button>
+          <p class="small muted" style="margin-top:.8rem" data-variant-sku>
+            {t('product.sku')}: {product.variants[0]?.sku}
+          </p>
+          <p class="notice notice-ok" data-added hidden>{t('product.added')}</p>
+        </form>
+
+        <p class="small" style="margin-top:1rem">
+          {t('product.shippingBlurb', { amount: formatMoney(freeShippingThreshold, currency, lang) })}
+        </p>
+
+        <div style="margin-top:2rem">
+          {product.descriptionHtml && (
+            <details class="acc" open>
+              <summary>{t('product.description')}</summary>
+              <div class="acc-body prose" set:html={product.descriptionHtml} />
+              {showTranslationNote && (
+                <p class="small muted" style="margin-top:-.6rem">{t('product.sourceLanguageNote')}</p>
+              )}
+            </details>
+          )}
+
+          {specs.length > 0 && (
+            <details class="acc">
+              <summary>{t('product.specifications')}</summary>
+              <div class="acc-body">
+                <table class="spec-table">
+                  <tbody>
+                    {specs.map((s) => (
+                      <tr><th scope="row">{s.label}</th><td>{s.value}</td></tr>
+                    ))}
+                    <tr><th scope="row">{t('specs.vendor')}</th><td>{site.brand}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          )}
+
+          {product.benefits.length > 0 && (
+            <details class="acc">
+              <summary>{t('product.highlights')}</summary>
+              <div class="acc-body">
+                <ul style="padding-inline-start:1.1rem;margin:0">
+                  {product.benefits.map((b) => (
+                    <li style="margin-bottom:.5rem">
+                      {b.title && <strong>{b.title}</strong>}{b.title && b.body ? ' — ' : ''}{b.body}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
+          )}
+
+          {product.faqs.length > 0 && (
+            <details class="acc">
+              <summary>{t('product.faq')}</summary>
+              <div class="acc-body">
+                {product.faqs.map((f) => (
+                  <div style="margin-bottom:1rem">
+                    <strong>{f.q}</strong>
+                    <p style="margin:.3rem 0 0">{f.a}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
+
+          <details class="acc">
+            <summary>{t('product.shippingReturns')}</summary>
+            <div class="acc-body">
+              <p>{t('product.shippingBlurb', { amount: formatMoney(freeShippingThreshold, currency, lang) })}</p>
+              <p>{t('product.returnsBlurb')}</p>
+              <a class="link-line" href={p('pages', 'shipping')}>{t('common.readMore')}</a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section wrap">
+      <div class="section-head">
+        <h2>{t('product.related')}</h2>
+        <a class="link-line" href={p('collections', primaryCollection)}>
+          {t('product.moreIn', { collection: t(`collections.${primaryCollection}`) })}
+        </a>
+      </div>
+      <div class="grid">
+        {related.map((r) => <ProductCard product={r} lang={lang} />)}
+      </div>
+    </section>
+  )}
+
+  <script type="application/json" data-product-json set:html={JSON.stringify({
+    handle: product.handle,
+    title: product.title,
+    image: product.images[0]?.src || '',
+    url: p('products', product.handle),
+    options: product.options.map((o) => o.name),
+    images: product.images.map((i) => i.src),
+    variants: product.variants.map((v) => ({ sku: v.sku, options: v.options, price: v.price, compareAt: v.compareAt })),
+  })} />
+
+  <script>
+    import LMV from '../../../scripts/store.js';
+
+    const dataEl = document.querySelector('[data-product-json]');
+    const form = document.querySelector('[data-buy-form]');
+    if (dataEl && form) {
+      const product = JSON.parse(dataEl.textContent || '{}');
+      const groups = Array.from(form.querySelectorAll('[data-option-index]'));
+      const priceEl = document.querySelector('.price');
+      const skuEl = document.querySelector('[data-variant-sku]');
+      const addedEl = document.querySelector('[data-added]');
+      const qtyInput = form.querySelector('[data-qty-input]');
+      const submit = form.querySelector('[data-add-to-cart]');
+      const skuLabel = (skuEl?.textContent || '').split(':')[0];
+
+      const selection = () => groups.map((g) => g.querySelector('[aria-pressed="true"]')?.dataset.optionValue ?? '');
+
+      function currentVariant() {
+        const chosen = selection();
+        return product.variants.find((v) => v.options.every((o, i) => o === chosen[i])) || null;
+      }
+
+      function refresh() {
+        const variant = currentVariant();
+        if (priceEl && variant) {
+          priceEl.setAttribute('data-price', String(variant.price));
+          LMV.paintPrices(document);
+        }
+        if (skuEl) skuEl.textContent = variant ? `${skuLabel}: ${variant.sku}` : '';
+        if (submit) submit.disabled = !variant;
+      }
+
+      groups.forEach((group) => {
+        group.querySelectorAll('[data-option-value]').forEach((chip) => {
+          chip.addEventListener('click', () => {
+            group.querySelectorAll('[data-option-value]').forEach((c) => c.setAttribute('aria-pressed', 'false'));
+            chip.setAttribute('aria-pressed', 'true');
+            refresh();
+          });
+        });
+      });
+
+      form.querySelectorAll('[data-qty]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const step = Number(btn.dataset.qty);
+          const next = Math.min(20, Math.max(1, Number(qtyInput.value || 1) + step));
+          qtyInput.value = String(next);
+        });
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const variant = currentVariant();
+        if (!variant) return;
+        LMV.addToCart({
+          handle: product.handle,
+          title: product.title,
+          image: product.image,
+          url: product.url,
+          sku: variant.sku,
+          optionNames: product.options,
+          options: variant.options,
+          price: variant.price,
+          qty: Number(qtyInput?.value || 1),
+        });
+        if (addedEl) {
+          addedEl.hidden = false;
+          setTimeout(() => { addedEl.hidden = true; }, 2600);
+        }
+      });
+
+      // Gallery
+      const main = document.querySelector('[data-gallery-main]');
+      document.querySelectorAll('[data-thumb]').forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const index = Number(thumb.dataset.thumb);
+          if (main && product.images[index]) main.src = product.images[index];
+          document.querySelectorAll('[data-thumb]').forEach((b) => b.setAttribute('aria-current', 'false'));
+          thumb.setAttribute('aria-current', 'true');
+        });
+      });
+
+      refresh();
+    }
+  </script>
+</Base>

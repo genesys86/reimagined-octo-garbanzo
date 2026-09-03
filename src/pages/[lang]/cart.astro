@@ -1,0 +1,158 @@
+---
+import Base from '../../layouts/Base.astro';
+import { localeCodes, useTranslations, localePath } from '../../lib/i18n.js';
+import { checkoutMode, freeShippingThreshold } from '../../data/site.config.mjs';
+
+export function getStaticPaths() {
+  return localeCodes.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const p = (...s) => localePath(lang, ...s);
+const isEnquiry = checkoutMode !== 'stripe';
+
+const labels = {
+  remove: t('cart.remove'),
+  unitPrice: t('cart.unitPrice'),
+  quantity: t('product.quantity'),
+  freeHint: t('cart.freeShippingHint', { amount: '{amount}' }),
+  freeReached: t('cart.freeShippingReached'),
+  threshold: freeShippingThreshold,
+  invalid: t('cart.discountInvalid'),
+  applied: t('cart.discountApplied', { code: '{code}' }),
+  free: t('cart.shippingFree'),
+};
+---
+<Base lang={lang} route="cart" title={isEnquiry ? t('cart.titleEnquiry') : t('cart.title')} noindex>
+  <section class="section-tight wrap">
+    <p class="eyebrow">{t('nav.cart')}</p>
+    <h1>{isEnquiry ? t('cart.titleEnquiry') : t('cart.title')}</h1>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <div class="cart-layout">
+      <div>
+        <div data-cart-lines></div>
+
+        <div data-cart-empty hidden style="padding-block:3rem">
+          <p class="lede">{t('cart.empty')}</p>
+          <a class="btn" href={p('collections', 'all')}>{t('cart.emptyCta')}</a>
+        </div>
+
+        <p class="small muted" data-free-hint style="margin-top:1.2rem"></p>
+      </div>
+
+      <aside class="summary-box" data-cart-summary hidden>
+        <h2 style="font-size:1.3rem;margin-bottom:1rem">{t('checkout.summary')}</h2>
+
+        <div class="summary-row"><span>{t('cart.subtotal')}</span><span data-subtotal></span></div>
+        <div class="summary-row" data-discount-row hidden><span data-discount-label>{t('cart.discount')}</span><span data-discount-value></span></div>
+        <div class="summary-row"><span>{t('cart.shipping')}</span><span data-shipping></span></div>
+        <div class="summary-row total"><span>{t('cart.total')}</span><span data-total></span></div>
+
+        <form data-discount-form style="margin-top:1.2rem;display:flex;gap:.5rem">
+          <label class="visually-hidden" for="discount-code">{t('cart.discountPlaceholder')}</label>
+          <input id="discount-code" class="field" style="margin:0" name="code" placeholder={t('cart.discountPlaceholder')} />
+          <button class="btn btn-ghost btn-sm" type="submit">{t('cart.discountApply')}</button>
+        </form>
+        <p class="small" data-discount-msg hidden style="margin-top:.5rem"></p>
+
+        <a class="btn btn-block" href={p('checkout')} style="margin-top:1.4rem">
+          {isEnquiry ? t('cart.checkoutEnquiry') : t('cart.checkout')}
+        </a>
+        <a class="link-line" href={p('collections', 'all')} style="display:inline-block;margin-top:1.2rem">{t('cart.continue')}</a>
+        <p class="small muted" style="margin-top:1rem">
+          {t('cart.priceNote', { currency: '' })}<span data-currency-code></span>.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <script type="application/json" data-cart-labels set:html={JSON.stringify(labels)} />
+  <script>
+    import LMV from '../../scripts/store.js';
+
+    const labels = JSON.parse(document.querySelector('[data-cart-labels]').textContent);
+    const linesEl = document.querySelector('[data-cart-lines]');
+    const emptyEl = document.querySelector('[data-cart-empty]');
+    const summaryEl = document.querySelector('[data-cart-summary]');
+    const hintEl = document.querySelector('[data-free-hint]');
+
+    function money(amount) {
+      return LMV.formatMoney(amount, LMV.currency, document.documentElement.lang);
+    }
+
+    function render() {
+      const cart = LMV.cart;
+      emptyEl.hidden = cart.length > 0;
+      summaryEl.hidden = cart.length === 0;
+
+      linesEl.innerHTML = cart.map((line) => {
+        const key = LMV.lineKey(line);
+        const options = (line.optionNames || []).map((name, i) => `${name}: ${line.options[i]}`).join(' · ');
+        return `
+          <div class="cart-line" data-line="${key}">
+            <a href="${line.url}"><img src="${line.image}" alt="" width="96" height="96" loading="lazy"></a>
+            <div>
+              <a href="${line.url}" style="font-family:var(--serif);font-size:1.05rem">${line.title}</a>
+              ${options ? `<p class="small muted" style="margin:.3rem 0">${options}</p>` : ''}
+              <p class="small muted" style="margin:0">${labels.unitPrice}: <span data-price="${line.price}"></span></p>
+              <div class="qty" style="margin-top:.6rem">
+                <button type="button" data-step="-1" aria-label="-">−</button>
+                <input type="number" min="0" max="20" value="${line.qty}" data-qty aria-label="${labels.quantity}">
+                <button type="button" data-step="1" aria-label="+">+</button>
+              </div>
+            </div>
+            <div style="text-align:end">
+              <span data-price="${line.price * line.qty}"></span><br>
+              <button class="link-line small" type="button" data-remove style="background:none;border:0;border-bottom:1px solid;cursor:pointer;margin-top:.6rem">${labels.remove}</button>
+            </div>
+          </div>`;
+      }).join('');
+
+      const totals = LMV.totals();
+      document.querySelector('[data-subtotal]').textContent = money(totals.subtotal);
+      const discountRow = document.querySelector('[data-discount-row]');
+      discountRow.hidden = !totals.discount;
+      if (totals.discount) {
+        document.querySelector('[data-discount-label]').textContent = labels.applied.replace('{code}', totals.discount.code);
+        document.querySelector('[data-discount-value]').textContent = `− ${money(totals.reduction)}`;
+      }
+      document.querySelector('[data-shipping]').textContent = totals.shipping === 0 ? labels.free : money(totals.shipping);
+      document.querySelector('[data-total]').textContent = money(totals.total);
+
+      const remaining = labels.threshold - (totals.subtotal - totals.reduction);
+      hintEl.textContent = cart.length === 0 ? '' : remaining > 0
+        ? labels.freeHint.replace('{amount}', money(remaining))
+        : labels.freeReached;
+
+      LMV.paintPrices(linesEl);
+
+      linesEl.querySelectorAll('[data-line]').forEach((row) => {
+        const key = row.dataset.line;
+        const input = row.querySelector('[data-qty]');
+        row.querySelectorAll('[data-step]').forEach((btn) => btn.addEventListener('click', () => {
+          LMV.setQty(key, Number(input.value) + Number(btn.dataset.step));
+        }));
+        input.addEventListener('change', () => LMV.setQty(key, Number(input.value)));
+        row.querySelector('[data-remove]').addEventListener('click', () => LMV.removeLine(key));
+      });
+    }
+
+    document.querySelector('[data-discount-form]').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const msg = document.querySelector('[data-discount-msg]');
+      const found = LMV.setDiscount(input.value);
+      msg.hidden = false;
+      msg.textContent = found ? labels.applied.replace('{code}', found.code) : labels.invalid;
+      msg.className = found ? 'small notice notice-ok' : 'small notice notice-error';
+      render();
+    });
+
+    document.addEventListener('lmv:cart', render);
+    document.addEventListener('lmv:currency', render);
+    render();
+  </script>
+</Base>
